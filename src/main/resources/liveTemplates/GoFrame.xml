@@ -1,0 +1,35 @@
+<templateSet group="GoFrame">
+  <template name="gfapi" value="type $apiName$Req struct {&#10;&#9;g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;&#9;$input$&#10;}&#10;&#10;type $apiName$Res struct {&#10;}" description="gen gf api struct" toReformat="false" toShortenFQNames="true">
+    <variable name="apiName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="path" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="method" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="input" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gfapicombo" value="type (&#10;    $apiName$Req struct {&#10;        g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;        $input$&#10;    }&#10;    &#10;    $apiName$Res struct {&#10;    }&#10;}" description="gen gf api struct(gf &gt;= 2.5.7)" toReformat="false" toShortenFQNames="true">
+    <variable name="apiName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="path" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="method" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="input" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gfservice" value="type s$serviceName$ struct {&#10;}&#10;&#10;func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${$content$}&#10;}" description="gen gf service" toReformat="false" toShortenFQNames="true">
+    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gfctrlr" value="func (c *$cName$) $name$(ctx context.Context, req *$pName$.$name$Req) (res *$pName$.$name$Res, err error) {&#10;&#9;return&#10;}&#10;" description="gen gf controller" toReformat="false" toShortenFQNames="true">
+    <variable name="cName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="pName" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+</templateSet>

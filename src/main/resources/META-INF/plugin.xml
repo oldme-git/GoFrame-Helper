@@ -4,7 +4,15 @@
     <name>GoFrame Idea</name>
     <version>0.0.1</version>
     <vendor email="tyyn1022@gmail.com">oldme-git</vendor>
+    <description><![CDATA[
+        <H1>GoFrame Idea</H1>
+        <p>GoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrame</p>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.go</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
+    </extensions>
 </idea-plugin>
