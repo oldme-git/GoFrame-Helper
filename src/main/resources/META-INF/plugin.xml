@@ -15,6 +15,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
-        <completion.contributor language="go" implementationClass="com.github.oldmegit.goframeidea.contributor.ApiTagContributor" />
+        <completion.contributor language="go" implementationClass="com.github.oldmegit.goframeidea.contributor.Contributor" />
     </extensions>
 </idea-plugin>

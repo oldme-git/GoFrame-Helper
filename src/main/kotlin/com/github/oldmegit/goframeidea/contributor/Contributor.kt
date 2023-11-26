@@ -7,7 +7,7 @@ import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.patterns.PlatformPatterns
 
-class ApiTagContributor: CompletionContributor() {
+class Contributor: CompletionContributor() {
     init {
         extend(
             CompletionType.BASIC,
