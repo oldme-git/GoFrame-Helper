@@ -12,7 +12,6 @@ class Contributor: CompletionContributor() {
         extend(
             CompletionType.BASIC,
             PlatformPatterns.psiElement(GoTypes.RAW_STRING).withSuperParent(2, GoTag::class.java),
-//            PlatformPatterns.psiElement(GoTypes.STRING),
             ApiTagProvider()
         )
     }
