@@ -1,6 +1,8 @@
 package com.github.oldmegit.goframeidea.provider
 
 import com.github.oldmegit.goframeidea.gf.Gf
+import com.github.oldmegit.goframeidea.ui.AppSettingsComponent
+import com.github.oldmegit.goframeidea.ui.AppSettingsState
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
@@ -94,7 +96,10 @@ class ApiTagProvider: CompletionProvider<CompletionParameters>() {
             absolute = absolute.replace("\\", "/")
         }
         val absolutePaths = absolute.split("/")
-        return absolutePaths[0] == "api"
+        val settings = AppSettingsState.getInstance()
+        println(settings.gfApiDir)
+        println(absolutePaths[0] == settings.gfApiDir)
+        return absolutePaths[0] == settings.gfApiDir
     }
 
     private fun codeCompletionSet(result: CompletionResultSet, text: String, tailText: String) {
