@@ -1,23 +1,19 @@
 package com.github.oldmegit.goframeidea.provider
 
 import com.github.oldmegit.goframeidea.gf.Gf
-import com.github.oldmegit.goframeidea.ui.AppSettingsComponent
 import com.github.oldmegit.goframeidea.ui.AppSettingsState
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
 import com.intellij.codeInsight.completion.CompletionParameters
-import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.lookup.LookupElementBuilder
-import com.intellij.openapi.util.IconLoader
 import com.intellij.psi.PsiElement
 import com.intellij.util.ProcessingContext
 import java.io.File
-import java.lang.Math.max
 import java.nio.file.Paths
 
-class ApiTagProvider: CompletionProvider<CompletionParameters>() {
+class ApiTagProvider: GfProvider() {
     override fun addCompletions(
         parameters: CompletionParameters,
         context: ProcessingContext,
@@ -28,13 +24,17 @@ class ApiTagProvider: CompletionProvider<CompletionParameters>() {
         val basePath = project.basePath
         val filePath = parameters.originalFile.virtualFile.path
 
+        if (!super.isGf(position)) {
+            return
+        }
+
         // check if the file is in the api dir
-        if (!isApiFile(basePath.toString(), filePath)) {
+        if (!isLegalFolder(basePath.toString(), filePath)) {
             return
         }
 
         // only struct name containing "Req" or "Res" can need code completion
-        if (!isStructLegal(position)) {
+        if (!isLegalStruct(position)) {
             return
         }
 
@@ -68,7 +68,7 @@ class ApiTagProvider: CompletionProvider<CompletionParameters>() {
         return null
     }
 
-    private fun isStructLegal(position: PsiElement): Boolean {
+    private fun isLegalStruct(position: PsiElement): Boolean {
         val structType = getStructType(position)
         if (structType == null) {
             return false
@@ -87,18 +87,15 @@ class ApiTagProvider: CompletionProvider<CompletionParameters>() {
         return ""
     }
 
-    // check if the file is in the api dir
-    private fun isApiFile(base: String, file: String): Boolean {
-        val basePath = Paths.get(base)
-        val filePath = Paths.get(file)
-        var absolute = basePath.relativize(filePath).toString()
+    override fun isLegalFolder(folderPath: String, filePath: String): Boolean {
+        val basePathCls = Paths.get(folderPath)
+        val filePathCls = Paths.get(filePath)
+        var absolute = basePathCls.relativize(filePathCls).toString()
         if (File.separator == "\\") {
             absolute = absolute.replace("\\", "/")
         }
         val absolutePaths = absolute.split("/")
         val settings = AppSettingsState.getInstance()
-        println(settings.gfApiDir)
-        println(absolutePaths[0] == settings.gfApiDir)
         return absolutePaths[0] == settings.gfApiDir
     }
 

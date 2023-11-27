@@ -3,7 +3,6 @@ package com.github.oldmegit.goframeidea.ui
 import com.intellij.openapi.options.Configurable
 import javax.swing.JComponent
 
-
 class AppSettingsConfigurable : Configurable {
     private var appSettingsComponent: AppSettingsComponent? = null
 

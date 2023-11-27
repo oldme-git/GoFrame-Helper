@@ -6,7 +6,6 @@ import com.intellij.openapi.components.State
 import com.intellij.openapi.components.Storage
 import com.intellij.util.xmlb.XmlSerializerUtil
 
-
 @State(
     name = "com.github.oldmegit.goframeidea.ui.AppSettingsState",
     storages = [Storage("GoFrameIdeaSettingsPlugin.xml")]
