@@ -27,5 +27,5 @@ abstract class GfProvider: CompletionProvider<CompletionParameters>() {
     }
 
     // check if the file is in the legal dir
-    abstract fun isLegalFolder(folderPath: String, filePath: String):Boolean
+    abstract fun isLegalFolder():Boolean
 }
