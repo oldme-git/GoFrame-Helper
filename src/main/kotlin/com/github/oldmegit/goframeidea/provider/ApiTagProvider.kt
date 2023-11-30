@@ -1,7 +1,6 @@
 package com.github.oldmegit.goframeidea.provider
 
 import com.github.oldmegit.goframeidea.gf.Gf
-import com.github.oldmegit.goframeidea.ui.AppSettingsState
 import com.github.oldmegit.goframeidea.utils.isApiFile
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
@@ -12,8 +11,6 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.util.ProcessingContext
-import java.io.File
-import java.nio.file.Paths
 
 class ApiTagProvider: GfProvider() {
     private lateinit var parameters: CompletionParameters

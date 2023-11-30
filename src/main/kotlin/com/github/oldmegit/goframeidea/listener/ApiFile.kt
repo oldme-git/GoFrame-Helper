@@ -6,7 +6,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 
-
 class ApiFile(private val project: Project): BulkFileListener {
     override fun after(events: MutableList<out VFileEvent>) {
         for (event in events) {
