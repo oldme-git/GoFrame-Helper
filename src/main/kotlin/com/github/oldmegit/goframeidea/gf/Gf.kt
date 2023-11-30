@@ -4,6 +4,7 @@ import com.intellij.openapi.util.IconLoader
 
 class Gf {
     companion object {
+        val goModMark = "github.com/gogf/gf/v2"
         val icon = IconLoader.getIcon("/icons/gf16.png", Gf::class.java)
         val openApiTagGMeta = mapOf(
             "path" to "",

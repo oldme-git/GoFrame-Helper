@@ -15,7 +15,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
-        <completion.contributor language="go" implementationClass="com.github.oldmegit.goframeidea.contributor.Contributor" />
+        <completion.contributor language="go"
+                                implementationClass="com.github.oldmegit.goframeidea.contributor.Contributor" />
 
         <applicationService
                 serviceImplementation="com.github.oldmegit.goframeidea.ui.AppSettingsState"/>
@@ -25,4 +26,9 @@
                 id="com.github.oldmegit.goframeidea.ui.AppSettingsConfigurable"
                 displayName="GoFrame Idea"/>
     </extensions>
+
+    <projectListeners>
+        <listener class="com.github.oldmegit.goframeidea.listener.ApiFile"
+                  topic="com.intellij.openapi.vfs.newvfs.BulkFileListener" />
+    </projectListeners>
 </idea-plugin>

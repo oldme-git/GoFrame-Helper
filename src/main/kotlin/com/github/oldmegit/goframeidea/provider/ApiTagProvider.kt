@@ -2,6 +2,7 @@ package com.github.oldmegit.goframeidea.provider
 
 import com.github.oldmegit.goframeidea.gf.Gf
 import com.github.oldmegit.goframeidea.ui.AppSettingsState
+import com.github.oldmegit.goframeidea.utils.isApiFile
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
@@ -39,7 +40,6 @@ class ApiTagProvider: GfProvider() {
         if (!(isLegalFolder() && isLegalStruct())) {
             return
         }
-
 
         if (positionIsTagKey()) {
             codeCompletionTagKey()
@@ -132,16 +132,7 @@ class ApiTagProvider: GfProvider() {
     }
 
     override fun isLegalFolder(): Boolean {
-        val project = position.project
-        val basePathCls = Paths.get(project.basePath.toString())
-        val filePathCls = Paths.get(parameters.originalFile.virtualFile.path)
-        var absolute = basePathCls.relativize(filePathCls).toString()
-        if (File.separator == "\\") {
-            absolute = absolute.replace("\\", "/")
-        }
-        val absolutePaths = absolute.split("/")
-        val settings = AppSettingsState.getInstance()
-        return absolutePaths[0] == settings.gfApiDir
+        return isApiFile(position.project, parameters.originalFile.virtualFile)
     }
 
     private fun codeCompletionTagKey(text: String, tailText: String) {
