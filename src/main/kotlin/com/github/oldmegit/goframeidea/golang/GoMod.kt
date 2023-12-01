@@ -1,7 +1,6 @@
 package com.github.oldmegit.goframeidea.golang
 
 import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiElement
 import java.io.File
 
 object GoMod {
