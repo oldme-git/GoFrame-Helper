@@ -24,10 +24,17 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gfctrlr" value="func (c *$cName$) $name$(ctx context.Context, req *$pName$.$name$Req) (res *$pName$.$name$Res, err error) {&#10;&#9;return&#10;}&#10;" description="gen gf controller" toReformat="false" toShortenFQNames="true">
+  <template name="gfctrlrfunc" value="func (c *$cName$) $name$(ctx context.Context, req *$pName$.$name$Req) (res *$pName$.$name$Res, err error) {&#10;&#9;return&#10;}&#10;" description="gen gf controller" toReformat="false" toShortenFQNames="true">
     <variable name="cName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="pName" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gfservicefunc" value="func (s *s$serviceName$) $funcName$(ctx context.Context) (err error) {&#10;}" description="gen gf service func" toReformat="false" toShortenFQNames="true">
+    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="funcName" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="GO_FILE" value="true" />
     </context>
