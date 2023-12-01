@@ -22,18 +22,20 @@ class AppSettingsConfigurable : Configurable {
     override fun isModified(): Boolean {
         val settings = AppSettingsState.getInstance()
         var modified = appSettingsComponent!!.gfApiDir != settings.gfApiDir
-//        modified = modified or (appSettingsComponent!!.ideaUserStatus != settings.ideaStatus)
+        modified = modified or (appSettingsComponent!!.gfLogicDir != settings.gfLogicDir)
         return modified
     }
 
     override fun apply() {
         val settings = AppSettingsState.getInstance()
         settings.gfApiDir = appSettingsComponent!!.gfApiDir!!
+        settings.gfLogicDir = appSettingsComponent!!.gfLogicDir!!
     }
 
     override fun reset() {
         val settings = AppSettingsState.getInstance()
         appSettingsComponent!!.gfApiDir = settings.gfApiDir
+        appSettingsComponent!!.gfLogicDir = settings.gfLogicDir
     }
 
     override fun disposeUIResources() {

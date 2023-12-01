@@ -12,6 +12,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 )
 internal class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var gfApiDir = "api"
+    var gfLogicDir = "internal/logic"
 
     override fun getState(): AppSettingsState {
         return this

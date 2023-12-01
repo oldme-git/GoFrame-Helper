@@ -1,7 +1,6 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.gf.Gf
-import com.github.oldmegit.goframeidea.utils.isApiFile
+import com.github.oldmegit.goframeidea.golang.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
@@ -129,7 +128,7 @@ class ApiTagProvider: GfProvider() {
     }
 
     override fun isLegalFolder(): Boolean {
-        return isApiFile(position.project, parameters.originalFile.virtualFile)
+        return Gf.isApiFile(position.project, parameters.originalFile.virtualFile)
     }
 
     private fun codeCompletionTagKey(text: String, tailText: String) {

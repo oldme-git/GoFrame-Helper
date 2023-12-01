@@ -28,7 +28,7 @@
     </extensions>
 
     <projectListeners>
-        <listener class="com.github.oldmegit.goframeidea.listener.ApiFile"
+        <listener class="com.github.oldmegit.goframeidea.listener.Listener"
                   topic="com.intellij.openapi.vfs.newvfs.BulkFileListener" />
     </projectListeners>
 </idea-plugin>
