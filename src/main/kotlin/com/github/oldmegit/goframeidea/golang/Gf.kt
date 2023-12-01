@@ -60,4 +60,14 @@ object Gf {
         val settings = AppSettingsState.getInstance()
         return relative.startsWith(settings.gfLogicDir + "/")
     }
+
+    fun enableApiWatch(): Boolean {
+        val settings = AppSettingsState.getInstance()
+        return settings.gfEnableApiWatch
+    }
+
+    fun enableLogicWatch(): Boolean {
+        val settings = AppSettingsState.getInstance()
+        return settings.gfEnableLogicWatch
+    }
 }

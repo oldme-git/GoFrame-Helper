@@ -26,9 +26,9 @@ class Listener(private val project: Project): BulkFileListener {
             }
 
             val runtime = Runtime.getRuntime()
-            if (Gf.isApiFile(project, file)) {
+            if (Gf.isApiFile(project, file) && Gf.enableApiWatch()) {
                 runtime.exec(Gf.gfGenCtrl, null, File(project.basePath.toString()))
-            } else if (Gf.isLogicFile(project, file)) {
+            } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch()) {
                 runtime.exec(Gf.gfGenService, null, File(project.basePath.toString()))
             }
         }
