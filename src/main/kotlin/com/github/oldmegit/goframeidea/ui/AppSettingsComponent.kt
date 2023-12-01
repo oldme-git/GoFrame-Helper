@@ -16,8 +16,8 @@ class AppSettingsComponent {
 
     init {
         panel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(JBLabel("Api str folder: "), apiDir, 1, false)
-            .addLabeledComponent(JBLabel("Logic str folder: "), logicDir, 1, false)
+            .addLabeledComponent(JBLabel("Api src folder: "), apiDir, 1, false)
+            .addLabeledComponent(JBLabel("Logic src folder: "), logicDir, 1, false)
             .addComponent(enableApiWatch)
             .addComponent(enableLogicWatch)
             .addComponentFillVertically(JPanel(), 0)

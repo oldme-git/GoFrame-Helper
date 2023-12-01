@@ -9,7 +9,7 @@ import java.nio.file.Paths
 
 object Gf {
     val goModMark = "github.com/gogf/gf/v2"
-    val icon = IconLoader.getIcon("/icons/gf16.png", Gf::class.java)
+    val icon = IconLoader.getIcon("/icons/gf16.svg", Gf::class.java)
 
     val gfGenCtrl = "gf gen ctrl"
     val gfGenService = "gf gen service"
