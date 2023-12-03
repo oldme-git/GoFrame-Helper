@@ -12,34 +12,42 @@ import com.intellij.psi.PsiElement
 import com.intellij.util.ProcessingContext
 
 class ApiTagProvider: GfProvider() {
-    private lateinit var parameters: CompletionParameters
-    private lateinit var position: PsiElement
-    private lateinit var context: ProcessingContext
-    private lateinit var result: CompletionResultSet
-
-    override fun addCompletions(
-        parameters: CompletionParameters,
-        context: ProcessingContext,
-        result: CompletionResultSet
-    ) {
-        this.parameters = parameters
-        this.position = parameters.position
-        this.context = context
-        this.result = result
-
-        if (!super.isGf(position)) {
-            return
-        }
-
-        // check if the file is in the api dir
+    override fun addCompletionsEvent() {
         // only struct name containing "Req" or "Res" can need code completion
-        if (!(isLegalFolder() && isLegalStruct())) {
+        if (!isValidStruct()) {
             return
         }
 
         if (positionIsTagKey()) {
             codeCompletionTagKey()
         }
+    }
+
+    override fun isValidFolder(): Boolean {
+        return Gf.isApiFile(position.project, parameters.originalFile.virtualFile)
+    }
+
+    private fun isValidStruct(): Boolean {
+        val structType = getStructType()
+        if (structType == null) {
+            return false
+        }
+
+        val structName = structType.prevSibling.prevSibling.text
+        val lastStr = structName.takeLast(3)
+        return lastStr == "Req" || lastStr == "Res"
+    }
+
+    private fun codeCompletionTagKey(text: String, tailText: String) {
+        result.addElement(
+            LookupElementBuilder.create(text)
+                .withInsertHandler { ctx, _ ->
+                    ctx.document.insertString(ctx.tailOffset, ":\"\"")
+                    ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
+                }
+                .withIcon(Gf.icon)
+                .withTailText(" $tailText", true)
+        )
     }
 
     // check position is tag key
@@ -59,6 +67,25 @@ class ApiTagProvider: GfProvider() {
         return text != ":\" "
     }
 
+    private fun codeCompletionTagKey() {
+        // get filed name
+        val filedName = getFieldName()
+
+        if (filedName == "g.Meta") {
+            for ((text, tailText) in Gf.openApiTagGMeta) {
+                codeCompletionTagKey(text, tailText)
+            }
+        } else {
+            for ((text, tailText) in Gf.openApiTagNormal) {
+                codeCompletionTagKey(text, tailText)
+            }
+        }
+
+        for ((text, tailText) in Gf.openApiTag) {
+            codeCompletionTagKey(text, tailText)
+        }
+    }
+
     // check position is tag value
     private fun positionIsTagValue(tagKey: String): Boolean {
         val text = position.text
@@ -73,23 +100,12 @@ class ApiTagProvider: GfProvider() {
         return textRange.contains(offset) && vTextRange.contains(stringOffset)
     }
 
-    private fun codeCompletionTagKey() {
-        // get filed name
-        val filedName = getFieldName()
-
-        if (filedName == "g.Meta") {
-            for ((text, tailText) in Gf.openApiTagGMeta) {
-                codeCompletionTagKey(text, tailText)
-            }
-        } else {
-            for ((text, tailText) in Gf.openApiTagNorMal) {
-                codeCompletionTagKey(text, tailText)
-            }
-        }
-
-        for ((text, tailText) in Gf.openApiTag) {
-            codeCompletionTagKey(text, tailText)
-        }
+    private fun codeCompletionTagValue(text: String, tailText: String) {
+        result.addElement(
+            LookupElementBuilder.create(text)
+                .withIcon(Gf.icon)
+                .withTailText(" $tailText", true)
+        )
     }
 
     private fun getStructType(): PsiElement? {
@@ -100,7 +116,7 @@ class ApiTagProvider: GfProvider() {
         return null
     }
 
-    private fun getFiledDefinition(): PsiElement? {
+    private fun getFiledPsiElement(): PsiElement? {
         val fieldDefinition = position.parent.parent.parent.firstChild
         if (fieldDefinition is GoFieldDefinition || fieldDefinition is GoAnonymousFieldDefinition) {
             return fieldDefinition
@@ -108,46 +124,11 @@ class ApiTagProvider: GfProvider() {
         return null
     }
 
-    private fun isLegalStruct(): Boolean {
-        val structType = getStructType()
-        if (structType == null) {
-            return false
-        }
-
-        val structName = structType.prevSibling.prevSibling.text
-        val lastStr = structName.takeLast(3)
-        return lastStr == "Req" || lastStr == "Res"
-    }
-
     private fun getFieldName(): String {
-        val name = getFiledDefinition()?.text
+        val name = getFiledPsiElement()?.text
         if (name != null) {
             return name
         }
         return ""
-    }
-
-    override fun isLegalFolder(): Boolean {
-        return Gf.isApiFile(position.project, parameters.originalFile.virtualFile)
-    }
-
-    private fun codeCompletionTagKey(text: String, tailText: String) {
-        result.addElement(
-            LookupElementBuilder.create(text)
-                .withInsertHandler { ctx, _ ->
-                    ctx.document.insertString(ctx.tailOffset, ":\"\"")
-                    ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
-                }
-                .withIcon(Gf.icon)
-                .withTailText(" $tailText", true)
-        )
-    }
-
-    private fun codeCompletionTagValue(text: String, tailText: String) {
-        result.addElement(
-            LookupElementBuilder.create(text)
-                .withIcon(Gf.icon)
-                .withTailText(" $tailText", true)
-        )
     }
 }

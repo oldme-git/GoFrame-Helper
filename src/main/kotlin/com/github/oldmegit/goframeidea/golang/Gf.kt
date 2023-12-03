@@ -21,7 +21,7 @@ object Gf {
         "deprecated" to "",
         "mime" to "default:application/json",
     )
-    val openApiTagNorMal = mapOf(
+    val openApiTagNormal = mapOf(
         "v" to "validate(only Req)",
     )
     val openApiTag = mapOf(
