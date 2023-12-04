@@ -13,7 +13,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
     storages = [Storage("GoFrameIdeaCache.xml")]
 )
 internal class Cache : PersistentStateComponent<Cache> {
-    var data: Data = Data()
+    var isGf: Boolean? = null
 
     override fun getState(): Cache {
         return this
@@ -27,8 +27,5 @@ internal class Cache : PersistentStateComponent<Cache> {
         fun getInstance(project: Project): Cache {
             return project.getService(Cache::class.java)
         }
-    }
-
-    internal class Data {
     }
 }

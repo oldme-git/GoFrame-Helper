@@ -1,15 +1,15 @@
 package com.github.oldmegit.goframeidea.goFrame
 
+import com.github.oldmegit.goframeidea.data.Cache
 import com.intellij.openapi.project.Project
 import java.io.File
 
 object GoMod {
-    private var isGfCache: Boolean? = null
-
     // check if it's gf project
     fun isGf(project: Project): Boolean {
-        if (isGfCache != null) {
-            return isGfCache as Boolean
+        val cache = Cache.getInstance(project)
+        if (cache.isGf != null) {
+            return cache.isGf!!
         }
         val basePath = project.basePath
         val goModFile = "$basePath/go.mod"
@@ -17,13 +17,14 @@ object GoMod {
 
         if (file.exists() && file.isFile) {
             val fileContent = file.readText()
-            isGfCache = fileContent.contains(Gf.goModMark)
+            cache.isGf = fileContent.contains(Gf.goModMark)
         }
-        return isGfCache as Boolean
+        return cache.isGf as Boolean
     }
 
     fun changeEvent(project: Project) {
-        isGfCache = null
+        val cache = Cache.getInstance(project)
+        cache.isGf = null
         isGf(project)
     }
 }
