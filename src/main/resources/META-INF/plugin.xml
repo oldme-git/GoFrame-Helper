@@ -12,19 +12,19 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.go</depends>
 
+    <resource-bundle>message.GoFrameIdeaBundle</resource-bundle>
+
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
         <completion.contributor language="go"
                                 implementationClass="com.github.oldmegit.goframeidea.contributor.Contributor" />
 
-        <applicationService
-                serviceImplementation="com.github.oldmegit.goframeidea.ui.AppSettingsState"/>
-        <applicationConfigurable
-                parentId="tools"
-                instance="com.github.oldmegit.goframeidea.ui.AppSettingsConfigurable"
-                id="com.github.oldmegit.goframeidea.ui.AppSettingsConfigurable"
-                displayName="GoFrame Idea"/>
+        <postStartupActivity implementation="com.github.oldmegit.goframeidea.startup.StartUp"/>
+
+        <projectConfigurable parentId="tools"
+                             instance="com.github.oldmegit.goframeidea.ui.AppSettingsConfigurable"
+                             key="name"/>
     </extensions>
 
     <projectListeners>
