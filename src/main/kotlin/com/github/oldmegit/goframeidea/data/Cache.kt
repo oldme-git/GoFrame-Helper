@@ -29,5 +29,6 @@ internal class Cache : PersistentStateComponent<Cache> {
         }
     }
 
-    internal class Data {}
+    internal class Data {
+    }
 }
