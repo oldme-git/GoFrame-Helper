@@ -6,7 +6,6 @@ import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
 import javax.swing.JPanel
 
-
 class AppSettingsComponent {
     val panel: JPanel
     private val apiDir = JBTextField()
