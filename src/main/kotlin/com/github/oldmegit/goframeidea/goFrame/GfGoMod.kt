@@ -4,7 +4,7 @@ import com.github.oldmegit.goframeidea.data.Cache
 import com.intellij.openapi.project.Project
 import java.io.File
 
-object GoMod {
+object GfGoMod {
     // check if it's gf project
     fun isGf(project: Project): Boolean {
         val cache = Cache.getInstance(project)
@@ -22,7 +22,8 @@ object GoMod {
         return cache.isGf as Boolean
     }
 
-    fun changeEvent(project: Project) {
+    // reset isGf cache
+    fun reset(project: Project) {
         val cache = Cache.getInstance(project)
         cache.isGf = null
         isGf(project)

@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.goFrame.GoMod
+import com.github.oldmegit.goframeidea.goFrame.GfGoMod
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet
@@ -37,7 +37,7 @@ abstract class GfProvider: CompletionProvider<CompletionParameters>() {
 
     private fun isGf(): Boolean {
         val project = position.project
-        return GoMod.isGf(project)
+        return GfGoMod.isGf(project)
     }
 
     // addCompletions Event

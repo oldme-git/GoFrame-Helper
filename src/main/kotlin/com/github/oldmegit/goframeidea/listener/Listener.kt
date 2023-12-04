@@ -1,7 +1,7 @@
 package com.github.oldmegit.goframeidea.listener
 
 import com.github.oldmegit.goframeidea.goFrame.Gf
-import com.github.oldmegit.goframeidea.goFrame.GoMod
+import com.github.oldmegit.goframeidea.goFrame.GfGoMod
 import com.goide.GoFileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
@@ -15,7 +15,7 @@ class Listener(private val project: Project): BulkFileListener {
 
             // listen go.mod change
             if (file.path.endsWith("go.mod")) {
-                GoMod.changeEvent(project)
+                GfGoMod.reset(project)
                 return
             }
 
