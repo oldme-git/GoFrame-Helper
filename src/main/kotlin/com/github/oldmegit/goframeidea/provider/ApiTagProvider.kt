@@ -1,15 +1,12 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.golang.Gf
+import com.github.oldmegit.goframeidea.goFrame.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
-import com.intellij.codeInsight.completion.CompletionParameters
-import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
-import com.intellij.util.ProcessingContext
 
 class ApiTagProvider: GfProvider() {
     override fun addCompletionsEvent() {
@@ -87,26 +84,26 @@ class ApiTagProvider: GfProvider() {
     }
 
     // check position is tag value
-    private fun positionIsTagValue(tagKey: String): Boolean {
-        val text = position.text
-        val tagKeyMark = "$tagKey:\""
-        val tagStart = text.indexOf(tagKeyMark)
-        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
-        val offset = parameters.offset
-        val textRange = position.textRange
-        val stringOffset = offset - textRange.startOffset
-
-        val vTextRange = TextRange(tagStart, tagEnd)
-        return textRange.contains(offset) && vTextRange.contains(stringOffset)
-    }
-
-    private fun codeCompletionTagValue(text: String, tailText: String) {
-        result.addElement(
-            LookupElementBuilder.create(text)
-                .withIcon(Gf.icon)
-                .withTailText(" $tailText", true)
-        )
-    }
+//    private fun positionIsTagValue(tagKey: String): Boolean {
+//        val text = position.text
+//        val tagKeyMark = "$tagKey:\""
+//        val tagStart = text.indexOf(tagKeyMark)
+//        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
+//        val offset = parameters.offset
+//        val textRange = position.textRange
+//        val stringOffset = offset - textRange.startOffset
+//
+//        val vTextRange = TextRange(tagStart, tagEnd)
+//        return textRange.contains(offset) && vTextRange.contains(stringOffset)
+//    }
+//
+//    private fun codeCompletionTagValue(text: String, tailText: String) {
+//        result.addElement(
+//            LookupElementBuilder.create(text)
+//                .withIcon(Gf.icon)
+//                .withTailText(" $tailText", true)
+//        )
+//    }
 
     private fun getStructType(): PsiElement? {
         val structType = position.parent.parent.parent.parent

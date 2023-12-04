@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.golang.GoMod
+import com.github.oldmegit.goframeidea.goFrame.GoMod
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet
@@ -40,9 +40,9 @@ abstract class GfProvider: CompletionProvider<CompletionParameters>() {
         return GoMod.isGf(project)
     }
 
-    // check if the file is in the legal dir
-    abstract fun isValidFolder():Boolean
-
     // addCompletions Event
     abstract fun addCompletionsEvent()
+
+    // check if the file is in the legal dir
+    abstract fun isValidFolder(): Boolean
 }

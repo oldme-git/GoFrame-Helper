@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.golang
+package com.github.oldmegit.goframeidea.goFrame
 
 import com.intellij.openapi.project.Project
 import java.io.File

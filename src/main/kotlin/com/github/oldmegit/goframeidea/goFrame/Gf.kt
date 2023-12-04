@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.golang
+package com.github.oldmegit.goframeidea.goFrame
 
 import com.github.oldmegit.goframeidea.ui.AppSettingsState
 import com.intellij.openapi.project.Project
@@ -49,7 +49,7 @@ object Gf {
     fun isApiFile(project: Project, virtualFile: VirtualFile): Boolean {
         val relative = getRelativePath(project, virtualFile)
         // get api path setting
-        val settings = AppSettingsState.getInstance()
+        val settings = AppSettingsState.getInstance(project)
         return relative.startsWith(settings.gfApiDir + "/")
     }
 
@@ -57,17 +57,17 @@ object Gf {
     fun isLogicFile(project: Project, virtualFile: VirtualFile): Boolean {
         val relative = getRelativePath(project, virtualFile)
         // get api path setting
-        val settings = AppSettingsState.getInstance()
+        val settings = AppSettingsState.getInstance(project)
         return relative.startsWith(settings.gfLogicDir + "/")
     }
 
-    fun enableApiWatch(): Boolean {
-        val settings = AppSettingsState.getInstance()
+    fun enableApiWatch(project: Project): Boolean {
+        val settings = AppSettingsState.getInstance(project)
         return settings.gfEnableApiWatch
     }
 
-    fun enableLogicWatch(): Boolean {
-        val settings = AppSettingsState.getInstance()
+    fun enableLogicWatch(project: Project): Boolean {
+        val settings = AppSettingsState.getInstance(project)
         return settings.gfEnableLogicWatch
     }
 }

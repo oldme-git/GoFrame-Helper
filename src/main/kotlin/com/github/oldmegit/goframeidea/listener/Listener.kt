@@ -1,7 +1,7 @@
 package com.github.oldmegit.goframeidea.listener
 
-import com.github.oldmegit.goframeidea.golang.Gf
-import com.github.oldmegit.goframeidea.golang.GoMod
+import com.github.oldmegit.goframeidea.goFrame.Gf
+import com.github.oldmegit.goframeidea.goFrame.GoMod
 import com.goide.GoFileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
@@ -26,9 +26,9 @@ class Listener(private val project: Project): BulkFileListener {
             }
 
             val runtime = Runtime.getRuntime()
-            if (Gf.isApiFile(project, file) && Gf.enableApiWatch()) {
+            if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
                 runtime.exec(Gf.gfGenCtrl, null, File(project.basePath.toString()))
-            } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch()) {
+            } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
                 runtime.exec(Gf.gfGenService, null, File(project.basePath.toString()))
             }
         }
