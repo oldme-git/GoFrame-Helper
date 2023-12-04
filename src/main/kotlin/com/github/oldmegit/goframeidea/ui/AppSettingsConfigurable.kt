@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframeidea.ui
 
-import com.github.oldmegit.goframeidea.bundle.Bundle
+import com.github.oldmegit.goframeidea.data.Bundle
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.project.Project
 import javax.swing.JComponent

@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.startup
+package com.github.oldmegit.goframeidea.data
 
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.Service
@@ -9,23 +9,25 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 
 @Service(Service.Level.PROJECT)
 @State(
-    name = "com.github.oldmegit.goframeidea.ui.GoFrameIdeaOrm",
-    storages = [Storage("GoFrameIdeaOrm.xml")]
+    name = "com.github.oldmegit.goframeidea.ui.GoFrameIdeaCache",
+    storages = [Storage("GoFrameIdeaCache.xml")]
 )
-internal class OrmState : PersistentStateComponent<OrmState> {
-    var a: String? = null
+internal class Cache : PersistentStateComponent<Cache> {
+    var data: Data = Data()
 
-    override fun getState(): OrmState {
+    override fun getState(): Cache {
         return this
     }
 
-    override fun loadState(state: OrmState) {
+    override fun loadState(state: Cache) {
         XmlSerializerUtil.copyBean(state, this)
     }
 
     companion object {
-        fun getInstance(project: Project): OrmState {
-            return project.getService(OrmState::class.java)
+        fun getInstance(project: Project): Cache {
+            return project.getService(Cache::class.java)
         }
     }
+
+    internal class Data {}
 }

@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.bundle
+package com.github.oldmegit.goframeidea.data
 
 import com.intellij.DynamicBundle
 import java.util.function.Supplier
