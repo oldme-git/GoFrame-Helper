@@ -9,8 +9,19 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
 
 object OrmUtil {
+    fun getData(psiElement: PsiElement): Map<String, String> {
+        return try {
+            val statement = getStatementContainDao(psiElement)
+            val dao = getDaoByStatement(statement!!)
+            val column = getColumnByDao(dao!!)
+            getTableData(column as GoType)
+        } catch (e: Exception) {
+            hashMapOf()
+        }
+    }
+
     // get statement contain XXXDao by given PsiElement
-    fun getStatementContainDao(psiElement: PsiElement): GoStatement? {
+    private fun getStatementContainDao(psiElement: PsiElement): GoStatement? {
         // get direct statement
         var statement = PsiTreeUtil.findFirstParent(psiElement) { e: PsiElement? ->
             e is GoStatement
@@ -26,7 +37,7 @@ object OrmUtil {
     }
 
     // get Xxx dao by statement
-    fun getDaoByStatement(statement: GoStatement): GoStructType? {
+    private fun getDaoByStatement(statement: GoStatement): GoStructType? {
         for (callExpr in PsiTreeUtil.findChildrenOfType(statement, GoCallExpr::class.java)) {
             val reference = GoPsiUtil.getCallReference(callExpr)
             // get the declaration of fun
@@ -66,7 +77,7 @@ object OrmUtil {
     }
 
     // get column GoType by XxxDao of type GoStructType
-    fun getColumnByDao(structType: GoStructType): GoType? {
+    private fun getColumnByDao(structType: GoStructType): GoType? {
         for (field in structType.fieldDeclarationList) {
             val name = field.fieldDefinitionList[0].name?.lowercase()
             if (name?.endsWith("columns")!!) {
@@ -77,7 +88,7 @@ object OrmUtil {
     }
 
     // get table data by XXXColumns of type GoTypeSpec
-    fun getTableData(columnType: GoType): Map<String, String> {
+    private fun getTableData(columnType: GoType): Map<String, String> {
         val typeSpec = columnType.resolve(ResolveState.initial()) as GoTypeSpec
         val fields = PsiTreeUtil.findChildrenOfType(typeSpec, GoFieldDeclaration::class.java)
         val data: MutableMap<String, String> = hashMapOf()
@@ -125,7 +136,7 @@ object OrmUtil {
             return getStatementContainDao(last.resolve() as GoVarDefinition)
         }
 
-        return null
+        return simpleStatement
     }
 
     private fun extractTextFromComment(comment: String): String {
