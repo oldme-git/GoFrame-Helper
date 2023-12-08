@@ -1,0 +1,42 @@
+name: GoFrame-IDEA Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get version from tag
+        id: tag_name
+        run: |
+          echo ::set-output name=current_version::${GITHUB_REF#refs/tags/v}
+        shell: bash
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Get Changelog Entry
+        id: changelog_reader
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          version: ${{ steps.tag_name.outputs.current_version }}
+          path: CHANGELOG.md
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          name: GoFrame-IDEA ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          body: ${{ steps.changelog_reader.outputs.changes }}

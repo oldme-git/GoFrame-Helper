@@ -1,8 +1,8 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.goFrame.Gf
-import com.github.oldmegit.goframeidea.goFrame.OrmCallables
-import com.github.oldmegit.goframeidea.goFrame.OrmUtil
+import com.github.oldmegit.goframeidea.gf.Gf
+import com.github.oldmegit.goframeidea.gf.OrmCallables
+import com.github.oldmegit.goframeidea.gf.OrmUtil
 import com.goide.psi.GoCallExpr
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.psi.PsiElement

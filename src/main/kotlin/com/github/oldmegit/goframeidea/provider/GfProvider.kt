@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframeidea.provider
 
-import com.github.oldmegit.goframeidea.goFrame.GfGoMod
+import com.github.oldmegit.goframeidea.gf.GfGoMod
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionProvider
 import com.intellij.codeInsight.completion.CompletionResultSet

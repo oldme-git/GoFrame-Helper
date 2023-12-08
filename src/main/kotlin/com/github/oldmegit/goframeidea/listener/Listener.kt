@@ -1,7 +1,7 @@
 package com.github.oldmegit.goframeidea.listener
 
-import com.github.oldmegit.goframeidea.goFrame.Gf
-import com.github.oldmegit.goframeidea.goFrame.GfGoMod
+import com.github.oldmegit.goframeidea.gf.Gf
+import com.github.oldmegit.goframeidea.gf.GfGoMod
 import com.goide.GoFileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener

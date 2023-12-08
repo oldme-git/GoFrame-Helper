@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.goFrame
+package com.github.oldmegit.goframeidea.gf
 
 import com.goide.inspections.core.GoCallableDescriptorSet
 import com.goide.inspections.core.GoMethodDescriptor

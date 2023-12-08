@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.goFrame
+package com.github.oldmegit.goframeidea.gf
 
 import com.github.oldmegit.goframeidea.ui.AppSettingsState
 import com.intellij.openapi.project.Project

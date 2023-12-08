@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframeidea.goFrame
+package com.github.oldmegit.goframeidea.gf
 
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil

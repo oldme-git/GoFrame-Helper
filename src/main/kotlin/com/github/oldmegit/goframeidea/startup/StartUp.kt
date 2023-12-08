@@ -1,7 +1,7 @@
 package com.github.oldmegit.goframeidea.startup
 
 import com.github.oldmegit.goframeidea.data.Bundle
-import com.github.oldmegit.goframeidea.goFrame.GfGoMod
+import com.github.oldmegit.goframeidea.gf.GfGoMod
 import com.intellij.openapi.progress.BackgroundTaskQueue
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.Task
