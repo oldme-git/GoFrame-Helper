@@ -2,7 +2,6 @@
 <idea-plugin>
     <id>com.github.oldmegit.goframeidea</id>
     <name>GoFrame Idea</name>
-    <version>1.0.0-alpha</version>
     <vendor email="tyyn1022@gmail.com">oldme-git</vendor>
     <description><![CDATA[
         <H1>GoFrame Idea</H1>
