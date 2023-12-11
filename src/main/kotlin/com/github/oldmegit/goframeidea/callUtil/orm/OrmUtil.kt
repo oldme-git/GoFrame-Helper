@@ -1,5 +1,6 @@
-package com.github.oldmegit.goframeidea.gf
+package com.github.oldmegit.goframeidea.callUtil.orm
 
+import com.github.oldmegit.goframeidea.callUtil.CallUtil
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil
 import com.intellij.psi.PsiComment
@@ -8,14 +9,14 @@ import com.intellij.psi.ResolveState
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
 
-object OrmUtil {
-    fun getData(psiElement: PsiElement): Map<String, String> {
+object OrmUtil : CallUtil {
+    override fun getData(psiElement: PsiElement): Map<String, String> {
         return try {
             val statement = getStatementContainDao(psiElement)
             val dao = getDaoByStatement(statement!!)
             val column = getColumnByDao(dao!!)
             getTableData(column as GoType)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             hashMapOf()
         }
     }

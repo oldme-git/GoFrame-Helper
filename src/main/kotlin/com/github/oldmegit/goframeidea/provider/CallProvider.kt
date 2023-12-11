@@ -1,22 +1,31 @@
 package com.github.oldmegit.goframeidea.provider
 
+import com.github.oldmegit.goframeidea.callUtil.cfg.CfgCallables
+import com.github.oldmegit.goframeidea.callUtil.cfg.CfgUtil
+import com.github.oldmegit.goframeidea.callUtil.orm.OrmCallables
+import com.github.oldmegit.goframeidea.callUtil.orm.OrmUtil
 import com.github.oldmegit.goframeidea.gf.Gf
-import com.github.oldmegit.goframeidea.gf.OrmCallables
-import com.github.oldmegit.goframeidea.gf.OrmUtil
 import com.goide.psi.GoCallExpr
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
-class OrmProvider : GfProvider() {
+class CallProvider : GfProvider() {
     override fun addCompletionsEvent() {
         val call = PsiTreeUtil.findFirstParent(this.position) { e: PsiElement ->
             e is GoCallExpr
         } as GoCallExpr
 
-        OrmCallables.conditionList.find(call, false) ?: return
+        val callUtil =
+            if (OrmCallables.find(call, false) != null) {
+                OrmUtil
+            } else if (CfgCallables.find(call, false) != null) {
+                CfgUtil
+            } else {
+                return
+            }
 
-        val data = OrmUtil.getData(position)
+        val data = callUtil.getData(position)
         for ((k, v) in data) {
             result.addElement(
                 LookupElementBuilder.create(k)
