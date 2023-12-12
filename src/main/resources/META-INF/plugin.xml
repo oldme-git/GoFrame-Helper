@@ -3,10 +3,6 @@
     <id>com.github.oldmegit.goframeidea</id>
     <name>GoFrame Idea</name>
     <vendor email="tyyn1022@gmail.com">oldme-git</vendor>
-    <description><![CDATA[
-        <H1>GoFrame Idea</H1>
-        <p>GoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrameGoFrame</p>
-    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.go</depends>
