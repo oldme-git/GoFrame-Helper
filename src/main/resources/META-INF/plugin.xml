@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
+<idea-plugin url="https://github.com/oldme-git/GoFrame-Idea">
     <id>com.github.oldmegit.goframeidea</id>
     <name>GoFrame Idea</name>
     <vendor email="tyyn1022@gmail.com">oldme-git</vendor>
