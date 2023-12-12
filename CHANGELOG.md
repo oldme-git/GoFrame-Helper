@@ -4,10 +4,18 @@
 
 ## [Unreleased]
 
+## [1.0.0-beta] - 2023-12-12
+### Added
+- gcfg code Completion(Currently only yaml is supported)
+- GoFrame-IDEA logo
+
+### Optimize
+- Compatible 222
+
 ## [1.0.0-alpha] - 2023-12-08
 ### Added
-- OpenApi Tag Completion
-- Orm Completion
+- OpenApi Tag code completion
+- Orm code completion
 - Api file watch
 - Service file watch
 - live template
