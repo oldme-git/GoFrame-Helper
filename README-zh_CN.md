@@ -19,7 +19,7 @@ GoFrame IDEA 是一款适用于 [GoFrame](https://github.com/gogf/gf) 框架的 
 
 # 支持
 ```
-GoFrame version >= 2.2.0
+GoFrame version GTE 2.2.0
 ```
 
 <!-- Plugin description end -->

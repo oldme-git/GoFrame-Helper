@@ -18,11 +18,11 @@ GoFrame IDEA is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.
 - Auto listens for the Api and Logic to generate the Controller and Service
 
 # Limitation
-```
-GoFrame version >= 2.2.0
-```
-
+`
+GoFrame version GTE 2.2.0
+`
 <!-- Plugin description end -->
+
 
 # Usage
 ## code completion
