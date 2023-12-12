@@ -8,14 +8,14 @@ English | [简体中文](./README-zh_CN.md)
 
 <!-- Plugin description -->
 
-GoFrame IDEA is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.com/gogf/gf). It provides Code completion, Live templates,File watch and so on features for [GoFrame](https://github.com/gogf/gf)
+GoFrame IDEA is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.com/gogf/gf). It provides code completion, live templates, file watch and other features for [GoFrame](https://github.com/gogf/gf)
 
 # Features
-- Api, Controller, Service live templates
+- Api, Controller and Service live templates
 - OpenApi tag code completion
 - gcfg config module code completion(Currently only yaml is supported)
 - gform files name code completion
-- Auto listens for the Api and Logic to generate the Controller and Service
+- Automatic listening for the Api and Logic to generate the Controller and Service
 
 # Limitation
 `
@@ -26,15 +26,14 @@ GoFrame version GTE 2.2.0
 
 # Usage
 ## code completion
-![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/6be4d572-9b46-4012-bcfb-e2567529dd2a)
+![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/6be4d572-9b46-4012-bcfb-e2567529dd2a)   
 ![cfg](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/f8299dba-6fa8-4610-9090-f95d8fccc1f9)
 
 ## live templates
 ![live](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/ac785bab-63dd-436a-9e1a-31a7ce34f2ff)
 
 ## window tool
-![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/84b2511b-cc58-44b5-9e47-045262387569)
-
+![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/1052c496-5309-4620-a96f-e88b390ff5e1)
 
 # Installation
 > Compatibility:

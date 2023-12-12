@@ -10,8 +10,8 @@ class AppSettingsComponent {
     val panel: JPanel
     private val apiDir = JBTextField()
     private val logicDir = JBTextField()
-    private val enableApiWatch = JBCheckBox("Enable api watch, it's auth exec `gf gen ctrl`")
-    private val enableLogicWatch = JBCheckBox("Enable service watch, it's auth exec `gf gen service`")
+    private val enableApiWatch = JBCheckBox("Enable Api watch, it will auto exec `gf gen ctrl`")
+    private val enableLogicWatch = JBCheckBox("Enable Service watch, it will auto exec `gf gen service`")
 
     init {
         panel = FormBuilder.createFormBuilder()

@@ -26,14 +26,14 @@ GoFrame version GTE 2.2.0
 
 # 使用
 ## 代码完成
-![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/6be4d572-9b46-4012-bcfb-e2567529dd2a)
+![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/6be4d572-9b46-4012-bcfb-e2567529dd2a)   
 ![cfg](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/f8299dba-6fa8-4610-9090-f95d8fccc1f9)
 
 ## 实时模板
 ![live](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/ac785bab-63dd-436a-9e1a-31a7ce34f2ff)
 
 ## 工具窗口
-![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/84b2511b-cc58-44b5-9e47-045262387569)
+![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/1052c496-5309-4620-a96f-e88b390ff5e1)
 
 # 安装
 > 兼容范围：
