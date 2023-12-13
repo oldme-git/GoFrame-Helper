@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2023-12-13
+### Updated
+- update some images and texts.
+
 ## [1.0.0-beta] - 2023-12-12
 ### Added
 - gcfg code Completion(Currently only yaml is supported)
