@@ -44,7 +44,7 @@ GoFrame version GTE 2.2.0
 In `setting->plugin->marketplace` search `GoFrame Helper`
 
 ## Jetbrains Marketplace
-<a href="https://plugins.jetbrains.com/plugin/23320-goframe-helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/7523fe23-e482-4e7c-be11-c2020da8cee6" alt="JetBrains" width="300"/></a>
+<a href="https://plugins.jetbrains.com/plugin/23324-goframe-helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/7523fe23-e482-4e7c-be11-c2020da8cee6" alt="JetBrains" width="300"/></a>
 
 # Thanks
 <a href="https://www.jetbrains.com/?from=GoFrame-Helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>

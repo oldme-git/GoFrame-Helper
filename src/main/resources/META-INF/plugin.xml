@@ -8,7 +8,7 @@
     <depends>org.jetbrains.plugins.go</depends>
     <depends>org.jetbrains.plugins.yaml</depends>
 
-    <resource-bundle>message.goframehelperBundle</resource-bundle>
+    <resource-bundle>message.GoFrameHelperBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
