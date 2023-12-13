@@ -26,14 +26,14 @@ GoFrame version GTE 2.2.0
 
 # Usage
 ## code completion
-![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/6be4d572-9b46-4012-bcfb-e2567529dd2a)   
-![cfg](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/f8299dba-6fa8-4610-9090-f95d8fccc1f9)
+![cfg](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/c76e7774-e7e1-41e4-8114-ddf4040c5957)
+![api](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/5d0b6569-cfc1-42a0-b13f-b04c1e14c13c)
 
 ## live templates
-![live](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/ac785bab-63dd-436a-9e1a-31a7ce34f2ff)
+![live](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/32c1f373-849e-4fc4-9cd9-ed7acf7c22a6)
 
 ## window tool
-![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/1052c496-5309-4620-a96f-e88b390ff5e1)
+![tool](https://github.com/oldme-git/GoFrame-Idea/assets/45782393/7cfe6dbf-6a04-4810-a64a-c87fed841000)
 
 # Installation
 > Compatibility:
