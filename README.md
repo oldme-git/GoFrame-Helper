@@ -3,7 +3,7 @@ English | [简体中文](./README-zh_CN.md)
 # GoFrame Idea
 
 <div align=center>
-<img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/00f725c2-6a16-4aae-a77e-2209ace5de75" width="300"/>
+<img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/557a15f9-0f89-4cfe-8b77-d01fd486cc4c" width="300"/>
 </div>
 
 <!-- Plugin description -->
