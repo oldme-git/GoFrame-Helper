@@ -3,7 +3,7 @@ package com.github.oldmegit.goframehelper.data
 import com.intellij.DynamicBundle
 import java.util.function.Supplier
 
-object Bundle : DynamicBundle("message.goframehelperBundle") {
+object Bundle : DynamicBundle("message.GoFrameHelperBundle") {
     override fun getMessage(key: String, vararg params: Any?): String {
         return super.getMessage(key, *params)
     }

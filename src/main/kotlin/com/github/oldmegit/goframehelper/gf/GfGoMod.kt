@@ -19,7 +19,7 @@ object GfGoMod {
             val fileContent = file.readText()
             cache.isGf = fileContent.contains(Gf.goModMark)
         }
-        return cache.isGf as Boolean
+        return cache.isGf ?: false
     }
 
     // reset isGf cache
