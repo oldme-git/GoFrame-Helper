@@ -1,6 +1,6 @@
 [English](./README.md) | 简体中文
 
-# GoFrame IDEA
+# GoFrame Idea
 
 <div align=center>
 <img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/00f725c2-6a16-4aae-a77e-2209ace5de75" width="300"/>
@@ -8,7 +8,7 @@
 
 <!-- Plugin description -->
 
-GoFrame IDEA 是一款适用于 [GoFrame](https://github.com/gogf/gf) 框架的 `Goland/Ultimate Edition` 插件。它为 [GoFrame](https://github.com/gogf/gf) 提供代码完成提示，代码模板，File watch 等功能。
+GoFrame Idea 是一款适用于 [GoFrame](https://github.com/gogf/gf) 框架的 `Goland/Ultimate Edition` 插件。它为 [GoFrame](https://github.com/gogf/gf) 提供代码完成提示，代码模板，File watch 等功能。
 
 # 特性
 - Api, Controller, Service 实时模板
@@ -41,11 +41,11 @@ GoFrame version GTE 2.2.0
 > - GoLand — 2022.2+
 
 ## 直接安装
-在 `setting->plugin->marketplace` 中搜索 `GoFrame IDEA` 
+在 `setting->plugin->marketplace` 中搜索 `GoFrame Idea` 
 
 ## 通过 Jetbrains Marketplace 安装
 <a href="#"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/7523fe23-e482-4e7c-be11-c2020da8cee6" alt="JetBrains" width="300"/></a>
 
 # Thanks
-<a href="https://www.jetbrains.com/?from=GoFrame-IDEA"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>
-<a href="https://goframe.org/?from=GoFrame-IDEA"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d02011ec-18f9-4f8a-9e85-57be3b72339b" height="120" alt="GoFrame"/></a>
+<a href="https://www.jetbrains.com/?from=GoFrame-Idea"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>
+<a href="https://goframe.org/?from=GoFrame-Idea"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d02011ec-18f9-4f8a-9e85-57be3b72339b" height="120" alt="GoFrame"/></a>

@@ -1,6 +1,6 @@
 English | [简体中文](./README-zh_CN.md)
 
-# GoFrame IDEA
+# GoFrame Idea
 
 <div align=center>
 <img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/00f725c2-6a16-4aae-a77e-2209ace5de75" width="300"/>
@@ -8,7 +8,7 @@ English | [简体中文](./README-zh_CN.md)
 
 <!-- Plugin description -->
 
-GoFrame IDEA is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.com/gogf/gf). It provides code completion, live templates, file watch and other features for [GoFrame](https://github.com/gogf/gf)
+GoFrame Idea is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.com/gogf/gf). It provides code completion, live templates, file watch and other features for [GoFrame](https://github.com/gogf/gf)
 
 # Features
 - Api, Controller and Service live templates
@@ -41,11 +41,11 @@ GoFrame version GTE 2.2.0
 > - GoLand — 2022.2+
 
 ## Direct
-In `setting->plugin->marketplace` search `GoFrame IDEA`
+In `setting->plugin->marketplace` search `GoFrame Idea`
 
 ## Jetbrains Marketplace
 <a href="#"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/7523fe23-e482-4e7c-be11-c2020da8cee6" alt="JetBrains" width="300"/></a>
 
 # Thanks
-<a href="https://www.jetbrains.com/?from=GoFrame-IDEA"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>
-<a href="https://goframe.org/?from=GoFrame-IDEA"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d02011ec-18f9-4f8a-9e85-57be3b72339b" height="120" alt="GoFrame"/></a>
+<a href="https://www.jetbrains.com/?from=GoFrame-Idea"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>
+<a href="https://goframe.org/?from=GoFrame-Idea"><img src="https://github.com/oldme-git/GoFrame-Idea/assets/45782393/d02011ec-18f9-4f8a-9e85-57be3b72339b" height="120" alt="GoFrame"/></a>

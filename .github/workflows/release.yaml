@@ -1,4 +1,4 @@
-name: GoFrame-IDEA Release
+name: GoFrame-Idea Release
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          name: GoFrame-IDEA ${{ github.ref_name }}
+          name: GoFrame-Idea ${{ github.ref_name }}
           draft: false
           prerelease: false
           body: ${{ steps.changelog_reader.outputs.changes }}

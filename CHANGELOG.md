@@ -7,7 +7,7 @@
 ## [1.0.0-beta] - 2023-12-12
 ### Added
 - gcfg code Completion(Currently only yaml is supported)
-- GoFrame-IDEA logo
+- GoFrame-Idea logo
 
 ### Optimize
 - Compatible 222
