@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# GoFrame Idea Changelog
+# GoFrame Helper Changelog
 
 ## [Unreleased]
 
@@ -11,7 +11,7 @@
 ## [1.0.0-beta] - 2023-12-12
 ### Added
 - gcfg code Completion(Currently only yaml is supported)
-- GoFrame-Idea logo
+- GoFrame-Helper logo
 
 ### Optimize
 - Compatible 222

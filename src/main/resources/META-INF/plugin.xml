@@ -1,30 +1,30 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin url="https://github.com/oldme-git/GoFrame-Idea">
-    <id>com.github.oldmegit.goframeidea</id>
-    <name>GoFrame Idea</name>
+<idea-plugin url="https://github.com/oldme-git/GoFrame-Helper">
+    <id>com.github.oldmegit.goframehelper</id>
+    <name>GoFrame Helper</name>
     <vendor email="tyyn1022@gmail.com">oldme-git</vendor>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.go</depends>
     <depends>org.jetbrains.plugins.yaml</depends>
 
-    <resource-bundle>message.GoFrameIdeaBundle</resource-bundle>
+    <resource-bundle>message.goframehelperBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
         <completion.contributor language="go"
-                                implementationClass="com.github.oldmegit.goframeidea.contributor.Contributor" />
+                                implementationClass="com.github.oldmegit.goframehelper.contributor.Contributor" />
 
-        <postStartupActivity implementation="com.github.oldmegit.goframeidea.startup.StartUp"/>
+        <postStartupActivity implementation="com.github.oldmegit.goframehelper.startup.StartUp"/>
 
         <projectConfigurable parentId="tools"
-                             instance="com.github.oldmegit.goframeidea.ui.AppSettingsConfigurable"
+                             instance="com.github.oldmegit.goframehelper.ui.AppSettingsConfigurable"
                              key="name"/>
     </extensions>
 
     <projectListeners>
-        <listener class="com.github.oldmegit.goframeidea.listener.Listener"
+        <listener class="com.github.oldmegit.goframehelper.listener.Listener"
                   topic="com.intellij.openapi.vfs.newvfs.BulkFileListener" />
     </projectListeners>
 </idea-plugin>
