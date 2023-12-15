@@ -8,7 +8,7 @@ English | [简体中文](./README-zh_CN.md)
 
 <!-- Plugin description -->
 
-GoFrame Helper is a `Goland/Ultimate Edition` plugin for [GoFrame](https://github.com/gogf/gf). It provides code completion, live templates, file watch and other features for [GoFrame](https://github.com/gogf/gf)
+GoFrame Helper is a `Goland/IntelliJ IDEA Ultimate` plugin for [GoFrame](https://github.com/gogf/gf). It provides code completion, live templates, file watch and other features for [GoFrame](https://github.com/gogf/gf)
 
 # Features
 - Api, Controller and Service live templates
