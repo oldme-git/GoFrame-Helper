@@ -1,5 +1,6 @@
 package com.github.oldmegit.goframehelper.ui
 
+import com.github.oldmegit.goframehelper.data.Bundle
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
@@ -10,13 +11,13 @@ class AppSettingsComponent {
     val panel: JPanel
     private val apiDir = JBTextField()
     private val logicDir = JBTextField()
-    private val enableApiWatch = JBCheckBox("Enable Api watch, it will auto exec `gf gen ctrl`")
-    private val enableLogicWatch = JBCheckBox("Enable Service watch, it will auto exec `gf gen service`")
+    private val enableApiWatch = JBCheckBox(Bundle.getMessage("setting.api.watch"))
+    private val enableLogicWatch = JBCheckBox(Bundle.getMessage("setting.service.watch"))
 
     init {
         panel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(JBLabel("Api src folder: "), apiDir, 1, false)
-            .addLabeledComponent(JBLabel("Logic src folder: "), logicDir, 1, false)
+            .addLabeledComponent(JBLabel(Bundle.getMessage("setting.api.src")), apiDir, 1, false)
+            .addLabeledComponent(JBLabel(Bundle.getMessage("setting.logic.src")), logicDir, 1, false)
             .addComponent(enableApiWatch)
             .addComponent(enableLogicWatch)
             .addComponentFillVertically(JPanel(), 0)
