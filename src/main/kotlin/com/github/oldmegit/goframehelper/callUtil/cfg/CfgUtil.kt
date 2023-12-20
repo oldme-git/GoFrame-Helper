@@ -1,8 +1,7 @@
 package com.github.oldmegit.goframehelper.callUtil.cfg
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.github.oldmegit.goframehelper.callUtil.cfg.types.CfgType
-import com.github.oldmegit.goframehelper.callUtil.cfg.types.Yaml
+import com.github.oldmegit.goframehelper.callUtil.cfg.types.*
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
@@ -11,8 +10,9 @@ import com.intellij.psi.PsiManager
 import java.io.File
 
 object CfgUtil : CallUtil {
-    private val cfgTypes = mapOf<String, CfgType>(
+    private val cfgTypes = mapOf(
         "yaml" to Yaml,
+        "json" to Json,
     )
 
     override fun getData(psiElement: PsiElement): Map<String, String> {
