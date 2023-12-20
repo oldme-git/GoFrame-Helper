@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-12-20
+### Fixed
+- Fixed [issue#1](https://github.com/oldme-git/GoFrame-Helper/issues/1)
+
+### Added
+- gcfg code Completion json support
+- Chinese UI
+- Custom gf-cli path
+
 ## [1.0.0] - 2023-12-13
 ### Updated
 - update some images and texts.
