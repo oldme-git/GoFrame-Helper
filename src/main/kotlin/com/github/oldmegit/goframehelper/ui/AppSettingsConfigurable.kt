@@ -25,6 +25,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         val settings = AppSettingsState.getInstance(project)
         var modified = appSettingsComponent!!.gfApiDir != settings.gfApiDir
         modified = modified or (appSettingsComponent!!.gfLogicDir != settings.gfLogicDir)
+        modified = modified or (appSettingsComponent!!.gfCustomGfCli != settings.gfCustomGfCli)
         modified = modified or (appSettingsComponent!!.gfEnableApiWatch != settings.gfEnableApiWatch)
         modified = modified or (appSettingsComponent!!.gfEnableLogicWatch != settings.gfEnableLogicWatch)
         return modified
@@ -34,6 +35,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         val settings = AppSettingsState.getInstance(project)
         settings.gfApiDir = appSettingsComponent!!.gfApiDir!!
         settings.gfLogicDir = appSettingsComponent!!.gfLogicDir!!
+        settings.gfCustomGfCli = appSettingsComponent!!.gfCustomGfCli!!
         settings.gfEnableApiWatch = appSettingsComponent!!.gfEnableApiWatch!!
         settings.gfEnableLogicWatch = appSettingsComponent!!.gfEnableLogicWatch!!
     }
@@ -42,6 +44,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         val settings = AppSettingsState.getInstance(project)
         appSettingsComponent!!.gfApiDir = settings.gfApiDir
         appSettingsComponent!!.gfLogicDir = settings.gfLogicDir
+        appSettingsComponent!!.gfCustomGfCli = settings.gfCustomGfCli
         appSettingsComponent!!.gfEnableApiWatch = settings.gfEnableApiWatch
         appSettingsComponent!!.gfEnableLogicWatch = settings.gfEnableLogicWatch
     }

@@ -11,9 +11,6 @@ object Gf {
     val goModMark = "github.com/gogf/gf/v2"
     val icon = IconLoader.getIcon("/icons/gf16.svg", Gf::class.java)
 
-    val gfGenCtrl = "gf gen ctrl"
-    val gfGenService = "gf gen service"
-
     val openApiTagGMeta = mapOf(
         "path" to "",
         "tags" to "",
@@ -69,5 +66,17 @@ object Gf {
     fun enableLogicWatch(project: Project): Boolean {
         val settings = AppSettingsState.getInstance(project)
         return settings.gfEnableLogicWatch
+    }
+    
+    // get gf gen ctrl command
+    fun gfGenCtrl(project: Project) : String {
+        val settings = AppSettingsState.getInstance(project)
+        return settings.gfCustomGfCli + " gen ctrl"
+    }
+
+    // get gf gen ctrl command
+    fun gfGenService(project: Project) : String {
+        val settings = AppSettingsState.getInstance(project)
+        return settings.gfCustomGfCli + " gen service"
     }
 }

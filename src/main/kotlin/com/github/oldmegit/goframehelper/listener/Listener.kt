@@ -31,9 +31,9 @@ class Listener(private val project: Project): BulkFileListener {
             val runtime = Runtime.getRuntime()
             try {
                 if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
-                    runtime.exec(Gf.gfGenCtrl, null, File(project.basePath.toString()))
+                    runtime.exec(Gf.gfGenCtrl(project), null, File(project.basePath.toString()))
                 } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
-                    runtime.exec(Gf.gfGenService, null, File(project.basePath.toString()))
+                    runtime.exec(Gf.gfGenService(project), null, File(project.basePath.toString()))
                 }
             } catch (_: Exception) {
                 val message = Bundle.getMessage("gfExecErrNotify")
