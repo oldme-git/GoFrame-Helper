@@ -49,3 +49,4 @@ In `setting->plugin->marketplace` search `GoFrame Helper`
 # Thanks
 <a href="https://www.jetbrains.com/?from=GoFrame-Helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/d4ffc9ea-7179-4e9e-af76-d8de04a5449f" height="120" alt="JetBrains"/></a>
 <a href="https://goframe.org/?from=GoFrame-Helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/d02011ec-18f9-4f8a-9e85-57be3b72339b" height="120" alt="GoFrame"/></a>
+<a href="https://github.com/maiqingqiang/go-orm-helper/?from=GoFrame-Helper"><img src="https://github.com/oldme-git/GoFrame-Helper/assets/45782393/4d74e6af-9fb2-4c4d-aa8b-75a102a0aa1b" height="120" alt="go-orm-helper"/></a>
