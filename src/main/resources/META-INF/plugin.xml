@@ -21,6 +21,8 @@
         <projectConfigurable parentId="tools"
                              instance="com.github.oldmegit.goframehelper.ui.AppSettingsConfigurable"
                              key="name"/>
+
+        <notificationGroup displayType="BALLOON" id="GoFrame Help Notify" />
     </extensions>
 
     <projectListeners>

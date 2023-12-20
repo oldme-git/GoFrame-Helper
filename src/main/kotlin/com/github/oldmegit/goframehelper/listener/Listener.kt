@@ -1,11 +1,14 @@
 package com.github.oldmegit.goframehelper.listener
 
+import com.github.oldmegit.goframehelper.data.Bundle
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.github.oldmegit.goframehelper.gf.GfGoMod
 import com.goide.GoFileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import java.io.File
 
 class Listener(private val project: Project): BulkFileListener {
@@ -26,10 +29,18 @@ class Listener(private val project: Project): BulkFileListener {
             }
 
             val runtime = Runtime.getRuntime()
-            if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
-                runtime.exec(Gf.gfGenCtrl, null, File(project.basePath.toString()))
-            } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
-                runtime.exec(Gf.gfGenService, null, File(project.basePath.toString()))
+            try {
+                if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
+                    runtime.exec(Gf.gfGenCtrl, null, File(project.basePath.toString()))
+                } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
+                    runtime.exec(Gf.gfGenService, null, File(project.basePath.toString()))
+                }
+            } catch (_: Exception) {
+                val message = Bundle.getMessage("gfExecErrNotify")
+                NotificationGroupManager.getInstance()
+                    .getNotificationGroup("GoFrame Help Notify")
+                    .createNotification(message, NotificationType.INFORMATION)
+                    .notify(project)
             }
         }
     }
