@@ -4,9 +4,13 @@ import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
+import com.intellij.codeInsight.completion.CompletionUtilCore
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
+import com.intellij.psi.impl.source.tree.LeafPsiElement
+import com.intellij.refactoring.suggested.endOffset
+import com.intellij.refactoring.suggested.startOffset
 
 class ApiTagProvider: GfProvider() {
     override fun addCompletionsEvent() {
@@ -15,9 +19,32 @@ class ApiTagProvider: GfProvider() {
             return
         }
 
-        if (positionIsTagKey()) {
-            codeCompletionTagKey()
+        println("----")
+
+//        CompletionUtilCore
+//        DUMMY_ELEMENT_NAME
+//        GoTagImpl
+
+        var ot = "abc"
+
+        var t = position.text
+        t = t.replace(CompletionUtilCore.DUMMY_IDENTIFIER, "")
+        t = t.replace("`", "")
+        if (t.last().toString() == " ") {
+            result.addElement(
+                LookupElementBuilder.create(ot).withPresentableText(ot)
+            )
         }
+        if (t.last().toString() == "a") {
+            result.addElement(
+                LookupElementBuilder.create(t.dropLast(1) + ot).withPresentableText(ot)
+            )
+        }
+
+//        if (positionIsTagKey()) {
+//            codeCompletionTagKey()
+//        }
+
     }
 
     override fun isValidFolder(): Boolean {
@@ -84,26 +111,26 @@ class ApiTagProvider: GfProvider() {
     }
 
     // check position is tag value
-//    private fun positionIsTagValue(tagKey: String): Boolean {
-//        val text = position.text
-//        val tagKeyMark = "$tagKey:\""
-//        val tagStart = text.indexOf(tagKeyMark)
-//        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
-//        val offset = parameters.offset
-//        val textRange = position.textRange
-//        val stringOffset = offset - textRange.startOffset
-//
-//        val vTextRange = TextRange(tagStart, tagEnd)
-//        return textRange.contains(offset) && vTextRange.contains(stringOffset)
-//    }
-//
-//    private fun codeCompletionTagValue(text: String, tailText: String) {
-//        result.addElement(
-//            LookupElementBuilder.create(text)
-//                .withIcon(Gf.icon)
-//                .withTailText(" $tailText", true)
-//        )
-//    }
+    private fun positionIsTagValue(tagKey: String): Boolean {
+        val text = position.text
+        val tagKeyMark = "$tagKey:\""
+        val tagStart = text.indexOf(tagKeyMark)
+        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
+        val offset = parameters.offset
+        val textRange = position.textRange
+        val stringOffset = offset - textRange.startOffset
+
+        val vTextRange = TextRange(tagStart, tagEnd)
+        return textRange.contains(offset) && vTextRange.contains(stringOffset)
+    }
+
+    private fun codeCompletionTagValue(text: String, tailText: String) {
+        result.addElement(
+            LookupElementBuilder.create(text)
+                .withIcon(Gf.icon)
+                .withTailText(" $tailText", true)
+        )
+    }
 
     private fun getStructType(): PsiElement? {
         val structType = position.parent.parent.parent.parent
