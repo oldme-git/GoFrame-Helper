@@ -4,6 +4,7 @@ import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
+import com.goide.psi.GoTag
 import com.intellij.codeInsight.completion.CompletionUtilCore
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.openapi.util.TextRange
@@ -13,6 +14,8 @@ import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
 
 class ApiTagProvider: GfProvider() {
+    private val tagValuePattern = String.format("\\w+:\"[^\"]*?%s.*?\"", CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED)
+
     override fun addCompletionsEvent() {
         // only struct name containing "Req" or "Res" can need code completion
         if (!isValidStruct()) {
@@ -21,30 +24,28 @@ class ApiTagProvider: GfProvider() {
 
         println("----")
 
-//        CompletionUtilCore
-//        DUMMY_ELEMENT_NAME
-//        GoTagImpl
+        var text = position.text
+        text = text.replace("`", "")
+        val textArr = text.split(CompletionUtilCore.DUMMY_IDENTIFIER)
+        val firstText = textArr[0]
+        var secondText = textArr[1]
 
-        var ot = "abc"
-
-        var t = position.text
-        t = t.replace(CompletionUtilCore.DUMMY_IDENTIFIER, "")
-        t = t.replace("`", "")
-        if (t.last().toString() == " ") {
-            result.addElement(
-                LookupElementBuilder.create(ot).withPresentableText(ot)
-            )
-        }
-        if (t.last().toString() == "a") {
-            result.addElement(
-                LookupElementBuilder.create(t.dropLast(1) + ot).withPresentableText(ot)
-            )
+        if (!positionIsTagKey()) {
+            return
         }
 
-//        if (positionIsTagKey()) {
-//            codeCompletionTagKey()
-//        }
+        val prefix: String
+        if (firstText.last().toString() == " ") {
+            prefix = ""
+        } else {
+            prefix = firstText.dropLast(1)
+        }
+        val tagList = getFieldNameTag()
 
+        for ((k, v) in tagList) {
+            println(firstText)
+            codeCompletionTagKey(prefix + k, v, k)
+        }
     }
 
     override fun isValidFolder(): Boolean {
@@ -62,66 +63,24 @@ class ApiTagProvider: GfProvider() {
         return lastStr == "Req" || lastStr == "Res"
     }
 
-    private fun codeCompletionTagKey(text: String, tailText: String) {
+    private fun codeCompletionTagKey(text: String, tailText: String, tableText: String = "") {
         result.addElement(
             LookupElementBuilder.create(text)
-                .withInsertHandler { ctx, _ ->
-                    ctx.document.insertString(ctx.tailOffset, ":\"\"")
-                    ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
-                }
-                .withIcon(Gf.icon)
-                .withTailText(" $tailText", true)
+            .withInsertHandler { ctx, _ ->
+                ctx.document.insertString(ctx.tailOffset, ":\"\"")
+                ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
+            }
+            .withIcon(Gf.icon)
+            .withTailText(" $tailText", true)
+            .withPresentableText(tableText)
         )
     }
 
     // check position is tag key
     private fun positionIsTagKey(): Boolean {
         val rawText = position.text
-        if (!rawText.contains("\"")) {
-            return true
-        }
-        val offset = parameters.offset
-        var textRange = TextRange(offset - 2, offset)
-        var text = parameters.editor.document.getText(textRange)
-        if (text != "\" ") {
-            return false
-        }
-        textRange = TextRange(offset - 3, offset)
-        text = parameters.editor.document.getText(textRange)
-        return text != ":\" "
-    }
-
-    private fun codeCompletionTagKey() {
-        // get filed name
-        val filedName = getFieldName()
-
-        if (filedName == "g.Meta") {
-            for ((text, tailText) in Gf.openApiTagGMeta) {
-                codeCompletionTagKey(text, tailText)
-            }
-        } else {
-            for ((text, tailText) in Gf.openApiTagNormal) {
-                codeCompletionTagKey(text, tailText)
-            }
-        }
-
-        for ((text, tailText) in Gf.openApiTag) {
-            codeCompletionTagKey(text, tailText)
-        }
-    }
-
-    // check position is tag value
-    private fun positionIsTagValue(tagKey: String): Boolean {
-        val text = position.text
-        val tagKeyMark = "$tagKey:\""
-        val tagStart = text.indexOf(tagKeyMark)
-        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
-        val offset = parameters.offset
-        val textRange = position.textRange
-        val stringOffset = offset - textRange.startOffset
-
-        val vTextRange = TextRange(tagStart, tagEnd)
-        return textRange.contains(offset) && vTextRange.contains(stringOffset)
+        val regex = Regex(tagValuePattern)
+        return !rawText.contains(regex)
     }
 
     private fun codeCompletionTagValue(text: String, tailText: String) {
@@ -154,5 +113,21 @@ class ApiTagProvider: GfProvider() {
             return name
         }
         return ""
+    }
+
+    private fun getFieldNameTag() : Map<String, String> {
+        // get filed name
+        val filedName = getFieldName()
+        val m = hashMapOf<String, String>()
+        m.putAll(Gf.openApiTag)
+
+        if (filedName == "g.Meta") {
+            m.putAll(Gf.openApiTag)
+
+        } else {
+            m.putAll(Gf.openApiTagNormal)
+        }
+
+        return m
     }
 }
