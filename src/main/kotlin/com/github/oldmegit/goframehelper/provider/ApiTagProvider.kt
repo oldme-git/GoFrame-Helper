@@ -1,5 +1,7 @@
 package com.github.oldmegit.goframehelper.provider
 
+import com.github.oldmegit.goframehelper.apiTagValueUtil.Method
+import com.github.oldmegit.goframehelper.apiTagValueUtil.TagValue
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
@@ -9,6 +11,10 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.psi.PsiElement
 
 class ApiTagProvider: GfProvider() {
+    private val valueObject = mapOf<String, TagValue>(
+        "method" to Method
+    )
+
     override fun addCompletionsEvent() {
         // only struct name containing "Req" or "Res" can need code completion
         if (!isValidStruct()) {
@@ -120,6 +126,24 @@ class ApiTagProvider: GfProvider() {
     }
 
     private fun valueCodeCompletion() {
-
+        val text = position.text.replace("`", "")
+        val textArr = text.split(CompletionUtilCore.DUMMY_IDENTIFIER)
+        val prefix = textArr[0]
+        val patten = "\\w+(?=:\")"
+        val regex = patten.toRegex()
+        val keyList = regex.findAll(prefix)
+        val current = keyList.last().value
+        val list = valueObject[current]?.list
+        val a = "POST"
+        val lastSpaceIndex = prefix.lastIndexOf(":\"")
+        val lastPrefixOfTag = prefix.substring(lastSpaceIndex + 1)
+        if (a.startsWith(lastPrefixOfTag)) {
+            println(prefix + a.removePrefix(lastPrefixOfTag))
+            result.addElement(
+                LookupElementBuilder.create(prefix + a.removePrefix(lastPrefixOfTag))
+                    .withIcon(Gf.icon)
+                    .withPresentableText(a)
+            )
+        }
     }
 }
