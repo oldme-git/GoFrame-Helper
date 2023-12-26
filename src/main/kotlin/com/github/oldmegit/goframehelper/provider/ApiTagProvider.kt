@@ -1,14 +1,22 @@
 package com.github.oldmegit.goframehelper.provider
 
+import com.github.oldmegit.goframehelper.apiTagValueUtil.*
+import com.github.oldmegit.goframehelper.apiTagValueUtil.TagValue
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition
 import com.goide.psi.GoStructType
+import com.intellij.codeInsight.completion.CompletionUtilCore
 import com.intellij.codeInsight.lookup.LookupElementBuilder
-import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 
 class ApiTagProvider: GfProvider() {
+    private val valueObject = mapOf<String, TagValue>(
+        "method" to Method,
+        "v" to Validation,
+        "mime" to Mime,
+    )
+
     override fun addCompletionsEvent() {
         // only struct name containing "Req" or "Res" can need code completion
         if (!isValidStruct()) {
@@ -16,12 +24,22 @@ class ApiTagProvider: GfProvider() {
         }
 
         if (positionIsTagKey()) {
-            codeCompletionTagKey()
+            keyCodeCompletion()
+        } else {
+            valueCodeCompletion()
         }
     }
 
     override fun isValidFolder(): Boolean {
         return Gf.isApiFile(position.project, parameters.originalFile.virtualFile)
+    }
+
+    private fun getStructType(): PsiElement? {
+        val structType = position.parent.parent.parent.parent
+        if (structType is GoStructType) {
+            return structType
+        }
+        return null
     }
 
     private fun isValidStruct(): Boolean {
@@ -33,84 +51,6 @@ class ApiTagProvider: GfProvider() {
         val structName = structType.prevSibling.prevSibling.text
         val lastStr = structName.takeLast(3)
         return lastStr == "Req" || lastStr == "Res"
-    }
-
-    private fun codeCompletionTagKey(text: String, tailText: String) {
-        result.addElement(
-            LookupElementBuilder.create(text)
-                .withInsertHandler { ctx, _ ->
-                    ctx.document.insertString(ctx.tailOffset, ":\"\"")
-                    ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
-                }
-                .withIcon(Gf.icon)
-                .withTailText(" $tailText", true)
-        )
-    }
-
-    // check position is tag key
-    private fun positionIsTagKey(): Boolean {
-        val rawText = position.text
-        if (!rawText.contains("\"")) {
-            return true
-        }
-        val offset = parameters.offset
-        var textRange = TextRange(offset - 2, offset)
-        var text = parameters.editor.document.getText(textRange)
-        if (text != "\" ") {
-            return false
-        }
-        textRange = TextRange(offset - 3, offset)
-        text = parameters.editor.document.getText(textRange)
-        return text != ":\" "
-    }
-
-    private fun codeCompletionTagKey() {
-        // get filed name
-        val filedName = getFieldName()
-
-        if (filedName == "g.Meta") {
-            for ((text, tailText) in Gf.openApiTagGMeta) {
-                codeCompletionTagKey(text, tailText)
-            }
-        } else {
-            for ((text, tailText) in Gf.openApiTagNormal) {
-                codeCompletionTagKey(text, tailText)
-            }
-        }
-
-        for ((text, tailText) in Gf.openApiTag) {
-            codeCompletionTagKey(text, tailText)
-        }
-    }
-
-    // check position is tag value
-//    private fun positionIsTagValue(tagKey: String): Boolean {
-//        val text = position.text
-//        val tagKeyMark = "$tagKey:\""
-//        val tagStart = text.indexOf(tagKeyMark)
-//        val tagEnd = text.indexOf("\"", tagStart + tagKeyMark.length)
-//        val offset = parameters.offset
-//        val textRange = position.textRange
-//        val stringOffset = offset - textRange.startOffset
-//
-//        val vTextRange = TextRange(tagStart, tagEnd)
-//        return textRange.contains(offset) && vTextRange.contains(stringOffset)
-//    }
-//
-//    private fun codeCompletionTagValue(text: String, tailText: String) {
-//        result.addElement(
-//            LookupElementBuilder.create(text)
-//                .withIcon(Gf.icon)
-//                .withTailText(" $tailText", true)
-//        )
-//    }
-
-    private fun getStructType(): PsiElement? {
-        val structType = position.parent.parent.parent.parent
-        if (structType is GoStructType) {
-            return structType
-        }
-        return null
     }
 
     private fun getFiledPsiElement(): PsiElement? {
@@ -127,5 +67,99 @@ class ApiTagProvider: GfProvider() {
             return name
         }
         return ""
+    }
+
+    private fun getFieldNameTag() : Map<String, String> {
+        // get filed name
+        val filedName = getFieldName()
+        val m = hashMapOf<String, String>()
+        m.putAll(Gf.openApiTag)
+
+        if (filedName == "g.Meta") {
+            m.putAll(Gf.openApiTagGMeta)
+        } else {
+            m.putAll(Gf.openApiTagNormal)
+        }
+
+        return m
+    }
+
+    // check position is tag key
+    private fun positionIsTagKey(): Boolean {
+        val rawText = position.text
+        val tagValuePattern = String.format("\\w+:\"[^\"]*?%s.*?\"", CompletionUtilCore.DUMMY_IDENTIFIER_TRIMMED)
+        val regex = Regex(tagValuePattern)
+        return !rawText.contains(regex)
+    }
+
+    // tag key code completion
+    private fun keyCodeCompletion() {
+        val text = position.text.replace("`", "")
+        val textArr = text.split(CompletionUtilCore.DUMMY_IDENTIFIER)
+        var prefix = textArr[0]
+
+        if (prefix.endsWith(" ")) {
+            prefix = ""
+        }
+
+        val lastSpaceIndex = prefix.lastIndexOf(" ")
+        val lastPrefixOfTag = prefix.substring(lastSpaceIndex + 1)
+        val tagList = getFieldNameTag()
+
+        for ((k, v) in tagList) {
+            if (k.startsWith(lastPrefixOfTag)) {
+                keyAddElement(prefix + k.removePrefix(lastPrefixOfTag), k , v)
+            }
+        }
+    }
+
+    // add tag key element
+    private fun keyAddElement(lookupString: String, text: String, tail: String = "") {
+        result.addElement(
+            LookupElementBuilder.create(lookupString)
+            .withInsertHandler { ctx, _ ->
+                ctx.document.insertString(ctx.tailOffset, ":\"\"")
+                ctx.editor.caretModel.moveToOffset(ctx.editor.caretModel.offset + 2)
+            }
+            .withIcon(Gf.icon)
+            .withTailText(" $tail", true)
+            .withPresentableText(text)
+        )
+    }
+
+    private fun valueCodeCompletion() {
+        val text = position.text.replace("`", "")
+        val textArr = text.split(CompletionUtilCore.DUMMY_IDENTIFIER)
+        val prefix = textArr[0]
+
+        val patten = "\\w+(?=:\")"
+        val regex = patten.toRegex()
+        val keyList = regex.findAll(prefix)
+        val current = keyList.last().value
+        val tagValue = valueObject[current] ?: return
+        val list = tagValue.list
+        val separator = tagValue.separator
+
+        var valueStartIndex = prefix.lastIndexOf(separator)
+        if (valueStartIndex == -1) {
+            valueStartIndex = prefix.lastIndexOf("\"")
+        }
+        val valuePrefixOfTag = prefix.substring(valueStartIndex + 1).lowercase()
+
+        for ((k, v) in list) {
+            if (k.startsWith(valuePrefixOfTag)) {
+                valueAddElement(prefix + k.removePrefix(valuePrefixOfTag), k, v)
+            }
+        }
+    }
+
+    // add tag value element
+    private fun valueAddElement(lookupString: String, text: String, tail: String = "") {
+        result.addElement(
+            LookupElementBuilder.create(lookupString)
+                .withIcon(Gf.icon)
+                .withTailText(" $tail", true)
+                .withPresentableText(text)
+        )
     }
 }
