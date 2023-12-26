@@ -67,7 +67,7 @@ object Validation : TagValue {
         )
 
     override val separator: String
-        get() = ","
+        get() = "|"
 
     private fun getTail(key: String): String {
         return GfValidationBundle.getMessage(key)

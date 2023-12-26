@@ -139,11 +139,15 @@ class ApiTagProvider: GfProvider() {
         val tagValue = valueObject[current] ?: return
         val list = tagValue.list
         val separator = tagValue.separator
+        var valueStartIndex = -1
 
-        var valueStartIndex = prefix.lastIndexOf(separator)
+        if (separator != "") {
+            valueStartIndex = prefix.lastIndexOf(separator)
+        }
         if (valueStartIndex == -1) {
             valueStartIndex = prefix.lastIndexOf("\"")
         }
+
         val valuePrefixOfTag = prefix.substring(valueStartIndex + 1).lowercase()
 
         for ((k, v) in list) {

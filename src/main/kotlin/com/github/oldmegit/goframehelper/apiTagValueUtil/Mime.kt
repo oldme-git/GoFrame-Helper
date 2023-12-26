@@ -9,5 +9,5 @@ object Mime : TagValue {
         )
 
     override val separator: String
-        get() = ","
+        get() = ""
 }
