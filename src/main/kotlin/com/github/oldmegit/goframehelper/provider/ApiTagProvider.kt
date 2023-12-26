@@ -111,8 +111,8 @@ class ApiTagProvider: GfProvider() {
         }
     }
 
-    // add tag element
-    private fun keyAddElement(lookupString: String, k: String, tail: String = "") {
+    // add tag key element
+    private fun keyAddElement(lookupString: String, text: String, tail: String = "") {
         result.addElement(
             LookupElementBuilder.create(lookupString)
             .withInsertHandler { ctx, _ ->
@@ -121,7 +121,7 @@ class ApiTagProvider: GfProvider() {
             }
             .withIcon(Gf.icon)
             .withTailText(" $tail", true)
-            .withPresentableText(k)
+            .withPresentableText(text)
         )
     }
 
@@ -129,21 +129,33 @@ class ApiTagProvider: GfProvider() {
         val text = position.text.replace("`", "")
         val textArr = text.split(CompletionUtilCore.DUMMY_IDENTIFIER)
         val prefix = textArr[0]
+
         val patten = "\\w+(?=:\")"
         val regex = patten.toRegex()
         val keyList = regex.findAll(prefix)
         val current = keyList.last().value
-        val list = valueObject[current]?.list
-        val a = "POST"
-        val lastSpaceIndex = prefix.lastIndexOf(":\"")
-        val lastPrefixOfTag = prefix.substring(lastSpaceIndex + 1)
-        if (a.startsWith(lastPrefixOfTag)) {
-            println(prefix + a.removePrefix(lastPrefixOfTag))
-            result.addElement(
-                LookupElementBuilder.create(prefix + a.removePrefix(lastPrefixOfTag))
-                    .withIcon(Gf.icon)
-                    .withPresentableText(a)
-            )
+        val list = valueObject[current]?.list ?: return
+
+        var valueStartIndex = prefix.lastIndexOf(",")
+        if (valueStartIndex == -1) {
+            valueStartIndex = prefix.lastIndexOf("\"")
         }
+        val valuePrefixOfTag = prefix.substring(valueStartIndex + 1).lowercase()
+
+        for ((k, v) in list) {
+            if (k.startsWith(valuePrefixOfTag)) {
+                valueAddElement(prefix + k.removePrefix(valuePrefixOfTag), k, v)
+            }
+        }
+    }
+
+    // add tag value element
+    private fun valueAddElement(lookupString: String, text: String, tail: String = "") {
+        result.addElement(
+            LookupElementBuilder.create(lookupString)
+                .withIcon(Gf.icon)
+                .withTailText(" $tail", true)
+                .withPresentableText(text)
+        )
     }
 }
