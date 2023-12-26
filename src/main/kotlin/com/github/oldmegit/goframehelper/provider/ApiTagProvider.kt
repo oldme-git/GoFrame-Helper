@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframehelper.provider
 
-import com.github.oldmegit.goframehelper.apiTagValueUtil.Method
+import com.github.oldmegit.goframehelper.apiTagValueUtil.*
 import com.github.oldmegit.goframehelper.apiTagValueUtil.TagValue
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
@@ -12,7 +12,8 @@ import com.intellij.psi.PsiElement
 
 class ApiTagProvider: GfProvider() {
     private val valueObject = mapOf<String, TagValue>(
-        "method" to Method
+        "method" to Method,
+        "v" to Validation
     )
 
     override fun addCompletionsEvent() {
@@ -134,9 +135,11 @@ class ApiTagProvider: GfProvider() {
         val regex = patten.toRegex()
         val keyList = regex.findAll(prefix)
         val current = keyList.last().value
-        val list = valueObject[current]?.list ?: return
+        val tagValue = valueObject[current] ?: return
+        val list = tagValue.list
+        val separator = tagValue.separator
 
-        var valueStartIndex = prefix.lastIndexOf(",")
+        var valueStartIndex = prefix.lastIndexOf(separator)
         if (valueStartIndex == -1) {
             valueStartIndex = prefix.lastIndexOf("\"")
         }

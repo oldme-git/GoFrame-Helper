@@ -11,4 +11,7 @@ object Method : TagValue {
             "options" to "",
             "head" to "",
         )
+
+    override val separator: String
+        get() = ","
 }
