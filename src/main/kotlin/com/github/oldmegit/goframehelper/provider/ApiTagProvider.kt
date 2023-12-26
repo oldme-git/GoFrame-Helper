@@ -13,7 +13,8 @@ import com.intellij.psi.PsiElement
 class ApiTagProvider: GfProvider() {
     private val valueObject = mapOf<String, TagValue>(
         "method" to Method,
-        "v" to Validation
+        "v" to Validation,
+        "mime" to Mime,
     )
 
     override fun addCompletionsEvent() {
