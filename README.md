@@ -16,6 +16,7 @@ GoFrame Helper is a `Goland/IntelliJ IDEA Ultimate` plugin for [GoFrame](https:/
 - gcfg config module code completion(support yaml and json)
 - gform files name code completion
 - Automatic listening for the Api and Logic to generate the Controller and Service
+- More...
 
 # Limitation
 `
@@ -26,8 +27,8 @@ GoFrame version GTE 2.2.0
 
 # Usage
 ## code completion
-![cfg](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/c76e7774-e7e1-41e4-8114-ddf4040c5957)
-![api](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/5d0b6569-cfc1-42a0-b13f-b04c1e14c13c)
+![apisuper](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/7fd92ab1-036c-457f-b302-1ff489f3f6d3)
+![orm](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/f27e5c1d-84dd-4ac0-a82e-0a34bc3f3f6d)
 
 ## live templates
 ![live](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/32c1f373-849e-4fc4-9cd9-ed7acf7c22a6)

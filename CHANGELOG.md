@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2023-12-27
+
+### Added
+
+- OpenApi v(gvalid),method and mime tagValue code completion
+
+### Optimize
+
+- OpenApi tag code completion
+
 ## [1.0.1] - 2023-12-20
 
 ### Fixed
@@ -43,8 +53,9 @@
 - Service file watch
 - live template
 
-[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-beta...v1.0.0
-[1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha
 [1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta
+[1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha

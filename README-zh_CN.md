@@ -16,6 +16,7 @@ GoFrame Helper 是一款适用于 [GoFrame](https://github.com/gogf/gf) 框架�
 - gcfg 配置组件代码提示(支持yaml, json)
 - gform 字段名代码提示
 - 自动监听 Api 和 Logic 生成对应的 Controller 和 Service
+- 更多...
 
 # 支持
 ```
@@ -26,14 +27,14 @@ GoFrame version GTE 2.2.0
 
 # 使用
 ## 代码完成
-![cfg](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/c76e7774-e7e1-41e4-8114-ddf4040c5957)
-![api](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/5d0b6569-cfc1-42a0-b13f-b04c1e14c13c)
+![apisuper](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/7fd92ab1-036c-457f-b302-1ff489f3f6d3)
+![orm](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/f27e5c1d-84dd-4ac0-a82e-0a34bc3f3f6d)
 
 ## 实时模板
 ![live](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/32c1f373-849e-4fc4-9cd9-ed7acf7c22a6)
 
 ## 工具窗口
-![tool](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/7cfe6dbf-6a04-4810-a64a-c87fed841000)
+![toolcn](https://github.com/oldme-git/GoFrame-Helper/assets/45782393/3a56ebb6-eb42-489d-8a05-6604dae9ed13)
 
 # 安装
 > 兼容范围：
