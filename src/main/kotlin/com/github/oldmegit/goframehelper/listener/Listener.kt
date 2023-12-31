@@ -3,6 +3,7 @@ package com.github.oldmegit.goframehelper.listener
 import com.github.oldmegit.goframehelper.data.Bundle
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.github.oldmegit.goframehelper.gf.GfGoMod
+import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.goide.GoFileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
@@ -37,6 +38,10 @@ class Listener(private val project: Project): BulkFileListener {
                 }
             } catch (_: Exception) {
                 val message = Bundle.getMessage("gfExecErrNotify")
+                val settings = AppSettingsState.getInstance(project)
+                settings.gfEnableApiWatch = false
+                settings.gfEnableLogicWatch = false
+
                 NotificationGroupManager.getInstance()
                     .getNotificationGroup("GoFrame Help Notify")
                     .createNotification(message, NotificationType.INFORMATION)
