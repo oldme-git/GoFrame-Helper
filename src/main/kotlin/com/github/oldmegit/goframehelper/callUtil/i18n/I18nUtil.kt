@@ -1,8 +1,9 @@
 package com.github.oldmegit.goframehelper.callUtil.i18n
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.github.oldmegit.goframehelper.callUtil.cfg.types.Json
-import com.github.oldmegit.goframehelper.callUtil.cfg.types.Yaml
+import com.github.oldmegit.goframehelper.callUtil.i18n.types.Json
+import com.github.oldmegit.goframehelper.callUtil.i18n.types.Yaml
+import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
@@ -10,7 +11,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
 import java.io.File
 
-object I18n : CallUtil {
+object I18nUtil : CallUtil {
     private val i18nTypes = mapOf(
         "yaml" to Yaml,
         "json" to Json,
@@ -18,21 +19,33 @@ object I18n : CallUtil {
 
     override fun getData(psiElement: PsiElement): Map<String, String> {
         val project = psiElement.project
-        val fileMaps = getI18nFilesPath(project)
-        println(fileMaps)
-        return hashMapOf()
-//        return try {
-//            I18nUtil.getKeyValue(fileMaps)
-//        } catch (_: Exception) {
-//            hashMapOf()
-//        }
+        return try {
+            val fileMaps = getI18nFilesPath(project)
+            val data = getKeyValue(fileMaps)
+            data.associateWith { "" }
+        } catch (_: Exception) {
+            hashMapOf()
+        }
+    }
+
+    // get key and value in all file
+    private fun getKeyValue(files: Map<PsiElement, String>): Set<String> {
+        val map = hashSetOf<String>()
+
+        for ((file, extension) in files) {
+            map += i18nTypes[extension]!!.getFileKey(file)
+        }
+        return map
     }
 
     // get gf i18n folder
     private fun getI18nFoldersPath(project: Project): Set<String> {
+        val settings = AppSettingsState.getInstance(project)
+        val custom = settings.gfCustomI18nFolder
         return setOf(
             "${project.basePath}/manifest/i18n",
             "${project.basePath}/i18n",
+            project.basePath + "/" + custom
         )
     }
 
@@ -56,6 +69,10 @@ object I18n : CallUtil {
         var extension: String
 
         files?.forEach { file ->
+            if (file.isDirectory) {
+                map += scanFolder(project, file.path)
+                return@forEach
+            }
             extension = file.extension.lowercase()
             if (extension in i18nTypes.keys) {
                 virtualFile = LocalFileSystem.getInstance().findFileByPath(file.path)!!
