@@ -5,12 +5,14 @@ import com.github.oldmegit.goframehelper.gf.Gf
 import com.github.oldmegit.goframehelper.gf.GfGoMod
 import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.goide.GoFileType
+import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
-import com.intellij.notification.NotificationGroupManager
-import com.intellij.notification.NotificationType
 import java.io.File
+import java.util.*
+
 
 class Listener(private val project: Project): BulkFileListener {
     override fun after(events: MutableList<out VFileEvent>) {
@@ -29,12 +31,26 @@ class Listener(private val project: Project): BulkFileListener {
                 return
             }
 
-            val runtime = Runtime.getRuntime()
             try {
-                if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
-                    runtime.exec(Gf.gfGenCtrl(project), null, File(project.basePath.toString()))
+                var command = if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
+                    Gf.gfGenCtrl(project)
                 } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
-                    runtime.exec(Gf.gfGenService(project), null, File(project.basePath.toString()))
+                    Gf.gfGenService(project)
+                } else {
+                    return
+                }
+
+                val os = System.getProperty("os.name").lowercase(Locale.getDefault())
+                if (os.contains("windows")) {
+                    command = "cmd /c $command"
+                } else if (os.contains("linux") || os.contains("mac")) {
+                    command = "/bin/sh -c $command"
+                }
+
+                val process = Runtime.getRuntime().exec(command, null, File(project.basePath.toString()))
+                val code = process.waitFor()
+                if (code != 0) {
+                    throw Exception("execute command fail")
                 }
             } catch (_: Exception) {
                 val message = Bundle.getMessage("gfExecErrNotify")
