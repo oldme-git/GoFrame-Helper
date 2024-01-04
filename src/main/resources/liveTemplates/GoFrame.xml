@@ -8,7 +8,7 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gfapicombo" value="type (&#10;    $apiName$Req struct {&#10;        g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;        $input$&#10;    }&#10;    &#10;    $apiName$Res struct {&#10;    }&#10;}" description="gen gf api struct(gf &gt;= 2.5.7)" toReformat="false" toShortenFQNames="true">
+  <template name="gfapicombo" value="type (&#10;    $apiName$Req struct {&#10;        g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;        $input$&#10;    }&#10;    &#10;    $apiName$Res struct {&#10;    }&#10;)" description="gen gf api struct(gf &gt;= 2.5.7)" toReformat="false" toShortenFQNames="true">
     <variable name="apiName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="path" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="method" expression="" defaultValue="" alwaysStopAt="true" />
