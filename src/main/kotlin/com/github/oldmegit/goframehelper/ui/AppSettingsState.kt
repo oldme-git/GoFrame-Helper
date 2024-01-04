@@ -18,6 +18,7 @@ internal class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var gfCustomGfCli = "gf"
     var gfEnableApiWatch = true
     var gfEnableLogicWatch = true
+    var gfCustomI18nFolder = "resource/i18n"
 
     override fun getState(): AppSettingsState {
         return this

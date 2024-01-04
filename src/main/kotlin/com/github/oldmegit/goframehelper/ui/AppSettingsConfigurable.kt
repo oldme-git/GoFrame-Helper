@@ -28,6 +28,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         modified = modified or (appSettingsComponent!!.gfCustomGfCli != settings.gfCustomGfCli)
         modified = modified or (appSettingsComponent!!.gfEnableApiWatch != settings.gfEnableApiWatch)
         modified = modified or (appSettingsComponent!!.gfEnableLogicWatch != settings.gfEnableLogicWatch)
+        modified = modified or (appSettingsComponent!!.gfCustomI18nFolder != settings.gfCustomI18nFolder)
         return modified
     }
 
@@ -38,6 +39,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         settings.gfCustomGfCli = appSettingsComponent!!.gfCustomGfCli!!
         settings.gfEnableApiWatch = appSettingsComponent!!.gfEnableApiWatch!!
         settings.gfEnableLogicWatch = appSettingsComponent!!.gfEnableLogicWatch!!
+        settings.gfCustomI18nFolder = appSettingsComponent!!.gfCustomI18nFolder!!
     }
 
     override fun reset() {
@@ -47,6 +49,7 @@ class AppSettingsConfigurable(private val project: Project) : Configurable {
         appSettingsComponent!!.gfCustomGfCli = settings.gfCustomGfCli
         appSettingsComponent!!.gfEnableApiWatch = settings.gfEnableApiWatch
         appSettingsComponent!!.gfEnableLogicWatch = settings.gfEnableLogicWatch
+        appSettingsComponent!!.gfCustomI18nFolder = settings.gfCustomI18nFolder
     }
 
     override fun disposeUIResources() {

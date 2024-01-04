@@ -2,6 +2,8 @@ package com.github.oldmegit.goframehelper.provider
 
 import com.github.oldmegit.goframehelper.callUtil.cfg.CfgCallables
 import com.github.oldmegit.goframehelper.callUtil.cfg.CfgUtil
+import com.github.oldmegit.goframehelper.callUtil.i18n.I18nUtil
+import com.github.oldmegit.goframehelper.callUtil.i18n.I18nCallables
 import com.github.oldmegit.goframehelper.callUtil.orm.OrmCallables
 import com.github.oldmegit.goframehelper.callUtil.orm.OrmUtil
 import com.github.oldmegit.goframehelper.gf.Gf
@@ -21,6 +23,13 @@ class CallProvider : GfProvider() {
                 OrmUtil
             } else if (CfgCallables.find(call, false) != null) {
                 CfgUtil
+            } else if (I18nCallables.find(call, false) != null) {
+                val index = position.parent.startOffsetInParent
+                // Restrict the second parameter
+                if (!(index == 5 || index == 6)) {
+                    return
+                }
+                I18nUtil
             } else {
                 return
             }

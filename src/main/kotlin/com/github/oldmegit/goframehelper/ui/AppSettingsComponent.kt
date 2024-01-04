@@ -14,12 +14,14 @@ class AppSettingsComponent {
     private val customGfCli = JBTextField()
     private val enableApiWatch = JBCheckBox(Bundle.getMessage("setting.api.watch"))
     private val enableLogicWatch = JBCheckBox(Bundle.getMessage("setting.service.watch"))
+    private val customI18nFolder = JBTextField()
 
     init {
         panel = FormBuilder.createFormBuilder()
             .addLabeledComponent(JBLabel(Bundle.getMessage("setting.api.src")), apiDir, 1, false)
             .addLabeledComponent(JBLabel(Bundle.getMessage("setting.logic.src")), logicDir, 1, false)
             .addLabeledComponent(JBLabel(Bundle.getMessage("setting.custom.gfCli")), customGfCli, 1, false)
+            .addLabeledComponent(JBLabel(Bundle.getMessage("setting.custom.i18n")), customI18nFolder, 1, false)
             .addComponent(enableApiWatch)
             .addComponent(enableLogicWatch)
             .addComponentFillVertically(JPanel(), 0)
@@ -54,5 +56,11 @@ class AppSettingsComponent {
         get() = enableLogicWatch.isSelected
         set(newStatus) {
             enableLogicWatch.setSelected(newStatus as Boolean)
+        }
+
+    var gfCustomI18nFolder: String?
+        get() = customI18nFolder.getText()
+        set(newText) {
+            customI18nFolder.text = newText
         }
 }

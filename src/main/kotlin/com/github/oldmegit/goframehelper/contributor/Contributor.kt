@@ -21,5 +21,10 @@ class Contributor: CompletionContributor() {
             PlatformPatterns.psiElement(GoTypes.STRING).withSuperParent(3, GoCallExpr::class.java),
             CallProvider()
         )
+        extend(
+            CompletionType.BASIC,
+            PlatformPatterns.psiElement(GoTypes.RAW_STRING).withSuperParent(3, GoCallExpr::class.java),
+            CallProvider()
+        )
     }
 }
