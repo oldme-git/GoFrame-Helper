@@ -29,6 +29,7 @@ object Gf {
         "d" to "default",
         "default" to "",
         "type" to "",
+        "in" to "header/path/query/cookie",
     )
 
     // get project relative path

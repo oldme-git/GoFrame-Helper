@@ -15,6 +15,7 @@ class ApiTagProvider: GfProvider() {
         "method" to Method,
         "v" to Validation,
         "mime" to Mime,
+        "in" to In
     )
 
     override fun addCompletionsEvent() {
