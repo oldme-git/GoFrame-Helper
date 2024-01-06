@@ -32,7 +32,7 @@ class Listener(private val project: Project): BulkFileListener {
             }
 
             try {
-                var command = if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
+                val commandRaw = if (Gf.isApiFile(project, file) && Gf.enableApiWatch(project)) {
                     Gf.gfGenCtrl(project)
                 } else if (Gf.isLogicFile(project, file) && Gf.enableLogicWatch(project)) {
                     Gf.gfGenService(project)
@@ -41,26 +41,28 @@ class Listener(private val project: Project): BulkFileListener {
                 }
 
                 val os = System.getProperty("os.name").lowercase(Locale.getDefault())
-                if (os.contains("windows")) {
-                    command = "cmd /c $command"
+                val process = if (os.contains("windows")) {
+                    Runtime.getRuntime().exec(commandRaw, null, File(project.basePath.toString()))
                 } else if (os.contains("linux") || os.contains("mac")) {
-                    command = "/bin/sh -c $command"
+                    val workDir = project.basePath
+                    val command = arrayOf("sh", "-c", "cd $workDir && $commandRaw")
+                    ProcessBuilder(*command).start()
+                } else {
+                    throw Exception(Bundle.getMessage("gfExecNotSupport"))
                 }
 
-                val process = Runtime.getRuntime().exec(command, null, File(project.basePath.toString()))
                 val code = process.waitFor()
                 if (code != 0) {
-                    throw Exception("execute command fail")
+                    throw Exception(Bundle.getMessage("gfExecErrNotify"))
                 }
-            } catch (_: Exception) {
-                val message = Bundle.getMessage("gfExecErrNotify")
+            } catch (e: Exception) {
                 val settings = AppSettingsState.getInstance(project)
                 settings.gfEnableApiWatch = false
                 settings.gfEnableLogicWatch = false
 
                 NotificationGroupManager.getInstance()
                     .getNotificationGroup("GoFrame Help Notify")
-                    .createNotification(message, NotificationType.INFORMATION)
+                    .createNotification(e.toString(), NotificationType.INFORMATION)
                     .notify(project)
             }
         }
