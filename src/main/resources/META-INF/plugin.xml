@@ -13,8 +13,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
-        <completion.contributor language="go"
-                                implementationClass="com.github.oldmegit.goframehelper.contributor.Contributor" />
+<!--        <completion.contributor language="go"-->
+<!--                                implementationClass="com.github.oldmegit.goframehelper.contributor.Contributor" />-->
 
         <postStartupActivity implementation="com.github.oldmegit.goframehelper.startup.StartUp"/>
 
@@ -23,6 +23,8 @@
                              key="name"/>
 
         <notificationGroup displayType="BALLOON" id="GoFrame Help Notify" />
+
+        <psi.referenceContributor language="go" implementation="com.github.oldmegit.goframehelper.ddd.YamlReferenceContributor"/>
     </extensions>
 
     <projectListeners>
