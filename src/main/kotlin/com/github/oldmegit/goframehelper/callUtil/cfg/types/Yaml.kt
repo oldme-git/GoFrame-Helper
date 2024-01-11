@@ -6,18 +6,19 @@ import org.jetbrains.yaml.psi.YAMLKeyValue
 import org.jetbrains.yaml.psi.YAMLScalar
 
 object Yaml : CfgType {
-    override fun getFileKeyValue(file: PsiElement): Map<String, String> {
-        val data: MutableMap<String, String> = hashMapOf()
+    override fun getFileKeyValue(file: PsiElement): Map<String, PsiElement?> {
+        val data: MutableMap<String, PsiElement?> = hashMapOf()
 
         val document = file.firstChild
         val all = PsiTreeUtil.findChildrenOfType(document, YAMLKeyValue::class.java)
         var k: String
-        var v = ""
+        var v: PsiElement?
 
         for (one in all) {
             k = getParentKeys(one) + one.keyText
+            v = null
             if (one.value is YAMLScalar) {
-                v = one.valueText
+                v = one
             }
             data[k] = v
         }
@@ -30,5 +31,13 @@ object Yaml : CfgType {
             return getParentKeys(parent) + parent.keyText + "."
         }
         return ""
+    }
+
+    override fun getPsiTail(psiElement: PsiElement): String {
+        var ctx = ""
+        if (psiElement is YAMLKeyValue) {
+            ctx = psiElement.valueText
+        }
+        return ctx
     }
 }

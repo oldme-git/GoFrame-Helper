@@ -4,12 +4,13 @@ import com.github.oldmegit.goframehelper.provider.ApiTagProvider
 import com.github.oldmegit.goframehelper.provider.CallProvider
 import com.goide.GoTypes
 import com.goide.psi.GoCallExpr
+import com.goide.psi.GoStringLiteral
 import com.goide.psi.GoTag
 import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.patterns.PlatformPatterns
 
-class Contributor: CompletionContributor() {
+class Completion: CompletionContributor() {
     init {
         extend(
             CompletionType.BASIC,

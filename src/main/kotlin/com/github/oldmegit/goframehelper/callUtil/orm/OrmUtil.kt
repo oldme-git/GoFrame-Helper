@@ -1,6 +1,7 @@
 package com.github.oldmegit.goframehelper.callUtil.orm
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
+import com.github.oldmegit.goframehelper.callUtil.cfg.CfgUtil
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil
 import com.intellij.psi.PsiComment
@@ -10,7 +11,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
 
 object OrmUtil : CallUtil {
-    override fun getData(psiElement: PsiElement): Map<String, String> {
+    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
         return try {
             val statement = getStatementContainDao(psiElement)
             val dao = getDaoByStatement(statement!!)
@@ -19,6 +20,16 @@ object OrmUtil : CallUtil {
         } catch (_: Exception) {
             hashMapOf()
         }
+    }
+
+    override fun getPsiTail(psiElement: PsiElement?): String {
+        var ctx = ""
+        if (psiElement == null) {
+            return ctx
+        }
+        val psiComment = psiElement.nextSibling.nextSibling
+        ctx = extractTextFromComment(psiComment.text)
+        return ctx
     }
 
     // get statement contain XXXDao by given PsiElement
@@ -89,19 +100,19 @@ object OrmUtil : CallUtil {
     }
 
     // get table data by XXXColumns of type GoTypeSpec
-    private fun getTableData(columnType: GoType): Map<String, String> {
+    private fun getTableData(columnType: GoType): Map<String, PsiElement?> {
         val typeSpec = columnType.resolve(ResolveState.initial()) as GoTypeSpec
         val fields = PsiTreeUtil.findChildrenOfType(typeSpec, GoFieldDeclaration::class.java)
-        val data: MutableMap<String, String> = hashMapOf()
+        val data: MutableMap<String, PsiElement?> = hashMapOf()
         for (field in fields) {
             val fieldDefinition = field.firstChild
             if (fieldDefinition !is GoFieldDefinition) {
                 continue
             }
             val psiComment = field.nextSibling.nextSibling
-            var comment = ""
+            var comment : PsiElement? = null
             if (psiComment is PsiComment) {
-                comment = extractTextFromComment(psiComment.text)
+                comment = psiComment
             }
             data[fieldDefinition.text.camelToSnakeCase()] = comment
         }
