@@ -12,10 +12,11 @@ import java.io.File
 object CfgUtil : CallUtil {
     private val cfgTypes = mapOf(
         "yaml" to Yaml,
+        "yml" to Yaml,
         "json" to Json,
     )
 
-    override fun getData(psiElement: PsiElement): Map<String, String> {
+    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
         val project = psiElement.project
         val fileMaps = getCfgFilesPath(project)
         return try {
@@ -25,9 +26,21 @@ object CfgUtil : CallUtil {
         }
     }
 
+    override fun getPsiTail(psiElement: PsiElement?): String {
+        var ctx = ""
+        if (psiElement == null) {
+            return ctx
+        }
+        val extension = psiElement.language.associatedFileType?.defaultExtension?.lowercase()
+        if (extension != null) {
+            ctx = cfgTypes[extension]?.getPsiTail(psiElement).toString()
+        }
+        return ctx
+    }
+
     // get key and value in all file
-    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, String> {
-        val map = hashMapOf<String, String>()
+    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, PsiElement?> {
+        val map = hashMapOf<String, PsiElement?>()
 
         for ((file, extension) in files) {
             map += cfgTypes[extension]!!.getFileKeyValue(file)

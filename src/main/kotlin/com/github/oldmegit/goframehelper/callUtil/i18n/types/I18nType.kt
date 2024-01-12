@@ -1,7 +1,7 @@
-package com.github.oldmegit.goframehelper.callUtil.cfg.types
+package com.github.oldmegit.goframehelper.callUtil.i18n.types
 
 import com.intellij.psi.PsiElement
 
 interface I18nType {
-    fun getFileKey(file: PsiElement): Set<String>
+    fun getFileKeyValue(file: PsiElement): Map<String, PsiElement?>
 }

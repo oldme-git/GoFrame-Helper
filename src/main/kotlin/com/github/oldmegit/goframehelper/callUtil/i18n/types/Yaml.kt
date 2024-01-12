@@ -6,13 +6,16 @@ import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.yaml.psi.YAMLKeyValue
 
 object Yaml : I18nType {
-    override fun getFileKey(file: PsiElement): Set<String> {
-        val data = hashSetOf<String>()
+    override fun getFileKeyValue(file: PsiElement): Map<String, PsiElement?> {
+        val data = hashMapOf<String, PsiElement?>()
+
         val document = file.firstChild
         val all = PsiTreeUtil.findChildrenOfType(document, YAMLKeyValue::class.java)
+        var k: String
 
         for (one in all) {
-            data.add(one.keyText)
+            k = one.keyText
+            data[k] = one
         }
         return data
     }

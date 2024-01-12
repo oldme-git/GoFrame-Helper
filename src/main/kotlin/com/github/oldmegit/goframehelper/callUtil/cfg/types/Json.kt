@@ -7,20 +7,16 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
 object Json : CfgType {
-    override fun getFileKeyValue(file: PsiElement): Map<String, String> {
-        val data: MutableMap<String, String> = hashMapOf()
+    override fun getFileKeyValue(file: PsiElement): Map<String, PsiElement?> {
+        val data: MutableMap<String, PsiElement?> = hashMapOf()
 
         val document = file.firstChild
         val all = PsiTreeUtil.findChildrenOfType(document, JsonProperty::class.java)
         var k: String
-        var v = ""
 
         for (one in all) {
             k = getParentKeys(one) + one.getKey()
-            if (one.value !is JsonObject && one.value !is JsonArray) {
-                v = one.value?.text!!
-            }
-            data[k] = v
+            data[k] = one
         }
         return data
     }
@@ -31,6 +27,17 @@ object Json : CfgType {
             return getParentKeys(parent) + parent.getKey() + "."
         }
         return ""
+    }
+
+    override fun getPsiTail(psiElement: PsiElement): String {
+        var ctx = ""
+        if (psiElement !is JsonProperty) {
+            return ctx
+        }
+        if (psiElement.value !is JsonObject && psiElement.value !is JsonArray) {
+            ctx = psiElement.value?.text!!.trim('"')
+        }
+        return ctx
     }
 
     private fun JsonProperty.getKey(): String {

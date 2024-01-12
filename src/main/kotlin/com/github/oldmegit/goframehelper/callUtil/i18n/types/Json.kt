@@ -6,14 +6,18 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
 object Json : I18nType {
-    override fun getFileKey(file: PsiElement): Set<String> {
-        val data = hashSetOf<String>()
+    override fun getFileKeyValue(file: PsiElement): Map<String, PsiElement?> {
+        val data = hashMapOf<String, PsiElement?>()
         val document = file.firstChild
         val all = PsiTreeUtil.findChildrenOfType(document, JsonProperty::class.java)
 
+        var k: String
+
         for (one in all) {
-            data.add(one.getKey())
+            k = one.getKey()
+            data[k] = one
         }
+
         return data
     }
 

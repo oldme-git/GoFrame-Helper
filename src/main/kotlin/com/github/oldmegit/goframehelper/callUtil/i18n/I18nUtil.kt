@@ -1,8 +1,8 @@
 package com.github.oldmegit.goframehelper.callUtil.i18n
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.github.oldmegit.goframehelper.callUtil.i18n.types.Json
 import com.github.oldmegit.goframehelper.callUtil.i18n.types.Yaml
+import com.github.oldmegit.goframehelper.callUtil.i18n.types.Json
 import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -14,26 +14,30 @@ import java.io.File
 object I18nUtil : CallUtil {
     private val i18nTypes = mapOf(
         "yaml" to Yaml,
+        "yml" to Yaml,
         "json" to Json,
     )
 
-    override fun getData(psiElement: PsiElement): Map<String, String> {
+    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
         val project = psiElement.project
         return try {
             val fileMaps = getI18nFilesPath(project)
-            val data = getKeyValue(fileMaps)
-            data.associateWith { "" }
+            getKeyValue(fileMaps)
         } catch (_: Exception) {
             hashMapOf()
         }
     }
 
+    override fun getPsiTail(psiElement: PsiElement?): String {
+        return ""
+    }
+
     // get key and value in all file
-    private fun getKeyValue(files: Map<PsiElement, String>): Set<String> {
-        val map = hashSetOf<String>()
+    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, PsiElement?> {
+        val map = hashMapOf<String, PsiElement?>()
 
         for ((file, extension) in files) {
-            map += i18nTypes[extension]!!.getFileKey(file)
+            map += i18nTypes[extension]!!.getFileKeyValue(file)
         }
         return map
     }
