@@ -10,7 +10,7 @@ import com.intellij.codeInsight.completion.CompletionUtilCore
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.psi.PsiElement
 
-class ApiTagProvider: GfProvider() {
+class CompletionApiTag: CompletionBase() {
     private val valueObject = mapOf<String, TagValue>(
         "method" to Method,
         "v" to Validation,

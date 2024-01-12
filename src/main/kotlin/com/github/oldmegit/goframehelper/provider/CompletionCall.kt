@@ -8,7 +8,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 
-class CallProvider : GfProvider() {
+class CompletionCall : CompletionBase() {
     override fun addCompletionsEvent() {
         val call = PsiTreeUtil.findFirstParent(this.position) { e: PsiElement ->
             e is GoCallExpr

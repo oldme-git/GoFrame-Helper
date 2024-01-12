@@ -7,7 +7,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.psi.PsiElement
 import com.intellij.util.ProcessingContext
 
-abstract class GfProvider: CompletionProvider<CompletionParameters>() {
+abstract class CompletionBase: CompletionProvider<CompletionParameters>() {
     protected lateinit var parameters: CompletionParameters
     protected lateinit var position: PsiElement
     protected lateinit var context: ProcessingContext

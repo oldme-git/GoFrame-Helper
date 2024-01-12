@@ -5,8 +5,7 @@ import com.github.oldmegit.goframehelper.callUtil.CallUtil
 import com.github.oldmegit.goframehelper.callUtil.cfg.CfgCallables
 import com.github.oldmegit.goframehelper.callUtil.cfg.CfgUtil
 import com.github.oldmegit.goframehelper.callUtil.i18n.I18nCallables
-import com.github.oldmegit.goframehelper.callUtil.orm.OrmCallables
-import com.github.oldmegit.goframehelper.callUtil.orm.OrmUtil
+import com.github.oldmegit.goframehelper.callUtil.i18n.I18nUtil
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoCallExpr
 import com.intellij.codeInsight.lookup.LookupElement
@@ -22,7 +21,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.yaml.psi.YAMLKeyValue
 import org.jetbrains.yaml.psi.YamlRecursivePsiElementVisitor
 
-class GallReference(element: PsiElement, range: TextRange, private val name: String) : PsiReferenceBase<PsiElement>(element, range) {
+class ReferenceGall(element: PsiElement, range: TextRange, private val name: String) : PsiReferenceBase<PsiElement>(element, range) {
     override fun resolve(): PsiElement? {
         val callUtil = getCallUtil()
 //        if (callUtil == null) {
@@ -70,7 +69,7 @@ class GallReference(element: PsiElement, range: TextRange, private val name: Str
         if (CfgCallables.find(call, false) != null) {
             callUtil = CfgUtil
         } else if (I18nCallables.find(call, false) != null) {
-//            callUtil = I18nUtil
+            callUtil = I18nUtil
         }
 
         return callUtil
