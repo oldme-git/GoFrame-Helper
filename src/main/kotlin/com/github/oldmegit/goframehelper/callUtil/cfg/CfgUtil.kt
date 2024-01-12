@@ -2,7 +2,6 @@ package com.github.oldmegit.goframehelper.callUtil.cfg
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
 import com.github.oldmegit.goframehelper.callUtil.cfg.types.*
-import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile

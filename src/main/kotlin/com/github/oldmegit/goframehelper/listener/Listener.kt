@@ -13,7 +13,6 @@ import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 import java.io.File
 import java.util.*
 
-
 class Listener(private val project: Project): BulkFileListener {
     override fun after(events: MutableList<out VFileEvent>) {
         for (event in events) {

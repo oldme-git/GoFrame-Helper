@@ -1,4 +1,3 @@
-// YamlReference.kt
 package com.github.oldmegit.goframehelper.provider
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
