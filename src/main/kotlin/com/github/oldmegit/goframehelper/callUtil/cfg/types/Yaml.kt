@@ -12,15 +12,10 @@ object Yaml : CfgType {
         val document = file.firstChild
         val all = PsiTreeUtil.findChildrenOfType(document, YAMLKeyValue::class.java)
         var k: String
-        var v: PsiElement?
 
         for (one in all) {
             k = getParentKeys(one) + one.keyText
-            v = null
-            if (one.value is YAMLScalar) {
-                v = one
-            }
-            data[k] = v
+            data[k] = one
         }
         return data
     }
@@ -35,7 +30,7 @@ object Yaml : CfgType {
 
     override fun getPsiTail(psiElement: PsiElement): String {
         var ctx = ""
-        if (psiElement is YAMLKeyValue) {
+        if (psiElement is YAMLKeyValue && psiElement.value is YAMLScalar) {
             ctx = psiElement.valueText
         }
         return ctx

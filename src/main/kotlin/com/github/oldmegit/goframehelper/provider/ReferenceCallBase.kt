@@ -9,7 +9,6 @@ import com.intellij.util.ProcessingContext
 
 class ReferenceCallBase : PsiReferenceProvider() {
     override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
-        // 如果元素是一个字符串字面量，且包含方括号，那么创建一个引用
         if (element is GoStringLiteral) {
             var text = element.text
             text = text.trim('"')
