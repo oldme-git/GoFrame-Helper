@@ -1,6 +1,7 @@
 package com.github.oldmegit.goframehelper.callUtil.orm
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
+import com.goide.parser.GoParser.ReferenceExpression
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil
 import com.intellij.psi.PsiComment
@@ -8,6 +9,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.ResolveState
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
+
 
 object OrmUtil : CallUtil() {
     override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
@@ -125,6 +127,7 @@ object OrmUtil : CallUtil() {
     // handle type GoAssignmentStatement
     // for example:
     // db = db.Xxx
+    // db = dao.Xxx
     private fun doAssignmentStatement(assignmentStatement: GoAssignmentStatement): GoStatement? {
         for (expression in assignmentStatement.leftHandExprList.expressionList) {
             val psiElementRoot = expression.reference?.resolve()
@@ -139,13 +142,23 @@ object OrmUtil : CallUtil() {
     // db.Xxx or dao.Xxx
     private fun doSimpleStatement(simpleStatement: GoSimpleStatement): GoStatement? {
         val declaration = simpleStatement.shortVarDeclaration
+
         // direct return if db := db.Xxx
         if (declaration != null) {
             return simpleStatement
         }
 
-        // db.Xxx
+        // get GoReferenceExpression list
         val list = PsiTreeUtil.findChildrenOfType(simpleStatement, GoReferenceExpression::class.java)
+        for (one in list) {
+            // dao.Xxx
+            // if statement contain dao
+            if (one.text == "dao") {
+                return simpleStatement
+            }
+        }
+
+        // db.Xxx
         val last = list.last()
         if (last.resolve() is GoVarDefinition) {
             return getStatementContainDao(last.resolve() as GoVarDefinition)
