@@ -1,6 +1,5 @@
 package com.github.oldmegit.goframehelper.callUtil.i18n.types
 
-import com.github.oldmegit.goframehelper.callUtil.cfg.types.I18nType
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import org.jetbrains.yaml.psi.YAMLKeyValue
