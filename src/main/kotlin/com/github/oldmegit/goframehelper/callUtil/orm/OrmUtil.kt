@@ -9,8 +9,8 @@ import com.intellij.psi.ResolveState
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
 
-object OrmUtil : CallUtil {
-    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
+object OrmUtil : CallUtil() {
+    override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
         return try {
             val statement = getStatementContainDao(psiElement)
             val dao = getDaoByStatement(statement!!)
@@ -22,13 +22,17 @@ object OrmUtil : CallUtil {
     }
 
     override fun getPsiTail(psiElement: PsiElement?): String {
-        var ctx = ""
+        var text = ""
         if (psiElement == null) {
-            return ctx
+            return text
         }
+
         val psiComment = psiElement.nextSibling.nextSibling
-        ctx = extractTextFromComment(psiComment.text)
-        return ctx
+        if (psiComment !is PsiComment) {
+            return text
+        }
+        text = extractTextFromComment(psiComment.text)
+        return text
     }
 
     // get statement contain XXXDao by given PsiElement
@@ -99,21 +103,21 @@ object OrmUtil : CallUtil {
     }
 
     // get table data by XXXColumns of type GoTypeSpec
-    private fun getTableData(columnType: GoType): Map<String, PsiElement?> {
+    private fun getTableData(columnType: GoType): Map<String, Set<PsiElement>> {
         val typeSpec = columnType.resolve(ResolveState.initial()) as GoTypeSpec
         val fields = PsiTreeUtil.findChildrenOfType(typeSpec, GoFieldDeclaration::class.java)
-        val data: MutableMap<String, PsiElement?> = hashMapOf()
+        val data = mutableMapOf<String, Set<PsiElement>>()
+
         for (field in fields) {
             val fieldDefinition = field.firstChild
             if (fieldDefinition !is GoFieldDefinition) {
                 continue
             }
-            val psiComment = field.nextSibling.nextSibling
-            var comment : PsiElement? = null
-            if (psiComment is PsiComment) {
-                comment = psiComment
+            if (field != null) {
+                data[fieldDefinition.text.camelToSnakeCase()] = setOf(field)
+            } else {
+                data[fieldDefinition.text.camelToSnakeCase()] = hashSetOf()
             }
-            data[fieldDefinition.text.camelToSnakeCase()] = comment
         }
         return data
     }

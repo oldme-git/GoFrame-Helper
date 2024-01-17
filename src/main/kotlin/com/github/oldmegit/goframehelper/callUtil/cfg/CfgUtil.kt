@@ -9,14 +9,14 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
 import java.io.File
 
-object CfgUtil : CallUtil {
+object CfgUtil : CallUtil() {
     private val cfgTypes = mapOf(
         "yaml" to Yaml,
         "yml" to Yaml,
         "json" to Json,
     )
 
-    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
+    override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
         val project = psiElement.project
         val fileMaps = getCfgFilesPath(project)
         return try {
@@ -39,13 +39,14 @@ object CfgUtil : CallUtil {
     }
 
     // get key and value in all file
-    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, PsiElement?> {
-        val map = hashMapOf<String, PsiElement?>()
+    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, Set<PsiElement>> {
+        var data = mapOf<String, Set<PsiElement>>()
 
         for ((file, extension) in files) {
-            map += cfgTypes[extension]!!.getFileKeyValue(file)
+            val fileMap = cfgTypes[extension]!!.getFileKeyValue(file)
+            data = data.merge(fileMap)
         }
-        return map
+        return data
     }
 
     // get gf config folder

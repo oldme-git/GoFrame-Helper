@@ -11,14 +11,14 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
 import java.io.File
 
-object I18nUtil : CallUtil {
+object I18nUtil : CallUtil() {
     private val i18nTypes = mapOf(
         "yaml" to Yaml,
         "yml" to Yaml,
         "json" to Json,
     )
 
-    override fun getData(psiElement: PsiElement): Map<String, PsiElement?> {
+    override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
         val project = psiElement.project
         return try {
             val fileMaps = getI18nFilesPath(project)
@@ -33,13 +33,14 @@ object I18nUtil : CallUtil {
     }
 
     // get key and value in all file
-    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, PsiElement?> {
-        val map = hashMapOf<String, PsiElement?>()
+    private fun getKeyValue(files: Map<PsiElement, String>): Map<String, Set<PsiElement>> {
+        var data = mapOf<String, Set<PsiElement>>()
 
         for ((file, extension) in files) {
-            map += i18nTypes[extension]!!.getFileKeyValue(file)
+            val fileMap = i18nTypes[extension]!!.getFileKeyValue(file)
+            data = data.merge(fileMap)
         }
-        return map
+        return data
     }
 
     // get gf i18n folder
