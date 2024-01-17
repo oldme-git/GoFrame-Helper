@@ -1,5 +1,6 @@
 package com.github.oldmegit.goframehelper.provider
 
+import com.github.oldmegit.goframehelper.callUtil.CallUtil
 import com.github.oldmegit.goframehelper.callUtil.orm.OrmCallables
 import com.github.oldmegit.goframehelper.callUtil.orm.OrmUtil
 import com.github.oldmegit.goframehelper.gf.Gf
@@ -23,10 +24,11 @@ class CompletionCall : CompletionBase() {
 
         val data = callUtil.getData(position)
         for ((k, v) in data) {
+            val tail = callUtil.getPsiTail(v)
             result.addElement(
                 LookupElementBuilder.create(k)
                     .withIcon(Gf.icon)
-                    .withTailText(" $v", true)
+                    .withTailText(" $tail", true)
             )
         }
     }
