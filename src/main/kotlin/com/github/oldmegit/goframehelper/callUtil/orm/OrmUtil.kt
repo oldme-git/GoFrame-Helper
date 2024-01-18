@@ -1,7 +1,6 @@
 package com.github.oldmegit.goframehelper.callUtil.orm
 
 import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.goide.parser.GoParser.ReferenceExpression
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil
 import com.intellij.psi.PsiComment
@@ -129,6 +128,14 @@ object OrmUtil : CallUtil() {
     // db = db.Xxx
     // db = dao.Xxx
     private fun doAssignmentStatement(assignmentStatement: GoAssignmentStatement): GoStatement? {
+        // get GoReferenceExpression list
+        for (one in assignmentStatement.expressionList) {
+            // dao.Xxx
+            // if statement contain dao
+            if (one.text.startsWith("dao.")) {
+                return assignmentStatement
+            }
+        }
         for (expression in assignmentStatement.leftHandExprList.expressionList) {
             val psiElementRoot = expression.reference?.resolve()
             return getStatementContainDao(psiElementRoot!!)
