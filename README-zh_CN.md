@@ -8,9 +8,9 @@
 
 <!-- Plugin description -->
 
-GoFrame Helper 是一款适用于 [GoFrame](https://github.com/gogf/gf) 框架的 `Goland/IntelliJ IDEA Ultimate` 插件。它为 [GoFrame](https://github.com/gogf/gf) 提供代码完成提示，代码模板，File watch 等功能。
+GoFrame Helper 是一款针对 [GoFrame](https://github.com/gogf/gf) 框架 的 Goland/IntelliJ 插件，它提供了代码提示，代码模板，gf 工具自动监听等功能，让您的 GoFrame 之旅更为愉快。
 
-# 特性
+# 功能
 - Api, Controller, Service 实时模板
 - OpenApi tag 代码提示
 - gcfg 配置组件代码提示(支持yaml, json)
