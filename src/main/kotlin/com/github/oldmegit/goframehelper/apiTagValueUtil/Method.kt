@@ -6,12 +6,14 @@ object Method : TagValue {
             "get" to "",
             "put" to "",
             "post" to "",
-            "patch" to "",
             "delete" to "",
-            "options" to "",
+            "patch" to "",
             "head" to "",
+            "connect" to "",
+            "options" to "",
+            "trace" to "",
+            "all" to ""
         )
-
     override val separator: String
         get() = ","
 }
