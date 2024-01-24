@@ -16,6 +16,7 @@ GoFrame Helper 是一款针对 [GoFrame](https://github.com/gogf/gf) 框架 的 
 - gcfg 配置组件代码提示(支持yaml, json)
 - gform 字段名代码提示
 - 自动监听 Api 和 Logic 生成对应的 Controller 和 Service
+- 中英双语支持
 - 更多...
 
 # 支持

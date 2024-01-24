@@ -4,6 +4,21 @@
 
 ## [Unreleased]
 
+## [1.0.4] - 2024-01-24
+
+### Added
+
+- add http methods more
+- cfg and i18n code jump
+
+### Fixed
+
+- Some ORM chain calls codes are not completion
+
+### Optimize
+
+- cfg and i18n code completion
+
 ## [1.0.3] - 2024-01-07
 
 ### Added
@@ -65,10 +80,11 @@
 - Service file watch
 - live template
 
-[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/oldme-git/goframe-helper/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-beta...v1.0.0
-[1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha
 [1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta
+[1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha
