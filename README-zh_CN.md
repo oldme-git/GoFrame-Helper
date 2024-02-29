@@ -13,8 +13,8 @@ GoFrame Helper 是一款针对 [GoFrame](https://github.com/gogf/gf) 框架 的 
 # 功能
 - Api, Controller, Service 实时模板
 - OpenApi tag 代码提示
-- gcfg 配置组件代码提示(支持yaml, json)
-- gform 字段名代码提示
+- cfg 配置组件代码提示(支持yaml, json)
+- orm 字段名代码提示
 - 自动监听 Api 和 Logic 生成对应的 Controller 和 Service
 - 中英双语支持
 - 更多...
