@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [1.0.5] - 2024-03-03
+
+### Optimize
+
+- Directory structure
+- README.md
+
 ## [1.0.4] - 2024-01-24
 
 ### Added
@@ -80,7 +87,8 @@
 - Service file watch
 - live template
 
-[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.5
 [1.0.4]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/oldme-git/goframe-helper/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...v1.0.2
