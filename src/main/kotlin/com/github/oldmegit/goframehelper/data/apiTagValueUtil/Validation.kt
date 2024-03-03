@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.apiTagValueUtil
+package com.github.oldmegit.goframehelper.data.apiTagValueUtil
 
 import com.github.oldmegit.goframehelper.data.GfValidationBundle
 

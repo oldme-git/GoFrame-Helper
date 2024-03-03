@@ -1,6 +1,6 @@
-package com.github.oldmegit.goframehelper.callUtil.orm
+package com.github.oldmegit.goframehelper.data.callUtil.orm
 
-import com.github.oldmegit.goframehelper.callUtil.CallUtil
+import com.github.oldmegit.goframehelper.data.callUtil.CallUtil
 import com.goide.psi.*
 import com.goide.psi.impl.GoPsiUtil
 import com.intellij.psi.PsiComment

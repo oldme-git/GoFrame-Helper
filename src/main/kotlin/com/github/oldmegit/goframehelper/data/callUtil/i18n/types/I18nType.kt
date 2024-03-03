@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.callUtil.i18n.types
+package com.github.oldmegit.goframehelper.data.callUtil.i18n.types
 
 import com.intellij.psi.PsiElement
 

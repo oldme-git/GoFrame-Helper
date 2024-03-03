@@ -1,10 +1,10 @@
-package com.github.oldmegit.goframehelper.provider
+package com.github.oldmegit.goframehelper.provider.go
 
-import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.github.oldmegit.goframehelper.callUtil.cfg.CfgCallables
-import com.github.oldmegit.goframehelper.callUtil.cfg.CfgUtil
-import com.github.oldmegit.goframehelper.callUtil.i18n.I18nCallables
-import com.github.oldmegit.goframehelper.callUtil.i18n.I18nUtil
+import com.github.oldmegit.goframehelper.data.callUtil.CallUtil
+import com.github.oldmegit.goframehelper.data.callUtil.cfg.CfgCallables
+import com.github.oldmegit.goframehelper.data.callUtil.cfg.CfgUtil
+import com.github.oldmegit.goframehelper.data.callUtil.i18n.I18nCallables
+import com.github.oldmegit.goframehelper.data.callUtil.i18n.I18nUtil
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoCallExpr
 import com.intellij.codeInsight.lookup.LookupElement

@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.apiTagValueUtil
+package com.github.oldmegit.goframehelper.data.apiTagValueUtil
 
 interface TagValue {
     val list: Map<String, String>

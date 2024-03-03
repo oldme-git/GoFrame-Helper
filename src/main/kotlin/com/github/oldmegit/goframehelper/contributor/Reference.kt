@@ -1,6 +1,6 @@
 package com.github.oldmegit.goframehelper.contributor
 
-import com.github.oldmegit.goframehelper.provider.ReferenceCallBase
+import com.github.oldmegit.goframehelper.provider.go.ReferenceCallBase
 import com.goide.psi.GoCallExpr
 import com.goide.psi.GoStringLiteral
 import com.intellij.patterns.PlatformPatterns

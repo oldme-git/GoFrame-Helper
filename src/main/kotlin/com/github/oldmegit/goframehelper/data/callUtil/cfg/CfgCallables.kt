@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.callUtil.cfg
+package com.github.oldmegit.goframehelper.data.callUtil.cfg
 
 import com.goide.inspections.core.GoCallableDescriptorSet
 import com.goide.inspections.core.GoMethodDescriptor

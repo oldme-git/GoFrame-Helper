@@ -1,8 +1,7 @@
-package com.github.oldmegit.goframehelper.provider
+package com.github.oldmegit.goframehelper.completion.go
 
-import com.github.oldmegit.goframehelper.callUtil.CallUtil
-import com.github.oldmegit.goframehelper.callUtil.orm.OrmCallables
-import com.github.oldmegit.goframehelper.callUtil.orm.OrmUtil
+import com.github.oldmegit.goframehelper.data.callUtil.orm.OrmCallables
+import com.github.oldmegit.goframehelper.data.callUtil.orm.OrmUtil
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoCallExpr
 import com.intellij.codeInsight.lookup.LookupElementBuilder

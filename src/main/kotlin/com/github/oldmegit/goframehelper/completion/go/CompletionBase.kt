@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.provider
+package com.github.oldmegit.goframehelper.completion.go
 
 import com.github.oldmegit.goframehelper.gf.GfGoMod
 import com.intellij.codeInsight.completion.CompletionParameters
