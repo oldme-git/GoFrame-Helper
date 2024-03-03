@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.contributor
+package com.github.oldmegit.goframehelper.contributor.go
 
 import com.github.oldmegit.goframehelper.provider.go.ReferenceCallBase
 import com.goide.psi.GoCallExpr

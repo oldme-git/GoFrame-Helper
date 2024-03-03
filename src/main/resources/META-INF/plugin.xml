@@ -14,7 +14,8 @@
         <defaultLiveTemplates file="liveTemplates/GoFrame.xml" />
 
         <completion.contributor language="go"
-                                implementationClass="com.github.oldmegit.goframehelper.contributor.Completion" />
+                                implementationClass="com.github.oldmegit.goframehelper.contributor.go.Completion" />
+        <psi.referenceContributor language="go" implementation="com.github.oldmegit.goframehelper.contributor.go.Reference"/>
 
         <postStartupActivity implementation="com.github.oldmegit.goframehelper.startup.StartUp"/>
 
@@ -24,7 +25,6 @@
 
         <notificationGroup displayType="BALLOON" id="GoFrame Help Notify" />
 
-        <psi.referenceContributor language="go" implementation="com.github.oldmegit.goframehelper.contributor.Reference"/>
     </extensions>
 
     <projectListeners>
