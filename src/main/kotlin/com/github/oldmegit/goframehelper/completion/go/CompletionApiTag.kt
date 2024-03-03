@@ -1,7 +1,7 @@
-package com.github.oldmegit.goframehelper.provider
+package com.github.oldmegit.goframehelper.completion.go
 
-import com.github.oldmegit.goframehelper.apiTagValueUtil.*
-import com.github.oldmegit.goframehelper.apiTagValueUtil.TagValue
+import com.github.oldmegit.goframehelper.data.apiTagValueUtil.*
+import com.github.oldmegit.goframehelper.data.apiTagValueUtil.TagValue
 import com.github.oldmegit.goframehelper.gf.Gf
 import com.goide.psi.GoAnonymousFieldDefinition
 import com.goide.psi.GoFieldDefinition

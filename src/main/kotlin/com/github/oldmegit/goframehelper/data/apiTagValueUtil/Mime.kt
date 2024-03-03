@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.apiTagValueUtil
+package com.github.oldmegit.goframehelper.data.apiTagValueUtil
 
 object Mime : TagValue {
     override val list: Map<String, String>

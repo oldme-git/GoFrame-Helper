@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.provider
+package com.github.oldmegit.goframehelper.provider.go
 
 import com.goide.psi.GoStringLiteral
 import com.intellij.psi.PsiElement

@@ -1,4 +1,4 @@
-package com.github.oldmegit.goframehelper.callUtil
+package com.github.oldmegit.goframehelper.data.callUtil
 
 import com.intellij.psi.PsiElement
 

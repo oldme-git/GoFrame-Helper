@@ -1,7 +1,7 @@
 package com.github.oldmegit.goframehelper.contributor
 
-import com.github.oldmegit.goframehelper.provider.CompletionApiTag
-import com.github.oldmegit.goframehelper.provider.CompletionCall
+import com.github.oldmegit.goframehelper.completion.go.CompletionApiTag
+import com.github.oldmegit.goframehelper.completion.go.CompletionCall
 import com.goide.GoTypes
 import com.goide.psi.GoCallExpr
 import com.goide.psi.GoTag
