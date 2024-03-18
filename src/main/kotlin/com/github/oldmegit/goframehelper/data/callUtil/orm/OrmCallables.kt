@@ -73,6 +73,7 @@ val OrmCallables = GoCallableDescriptorSet(
 
         // https://github.com/gogf/gf/blob/master/database/gdb/gdb_model_insert.go
         GoMethodDescriptor.of("(*github.com/gogf/gf/database/gdb.Model).Data"),
+        GoMethodDescriptor.of("(*github.com/gogf/gf/database/gdb.Model).OnConflict"),
         GoMethodDescriptor.of("(*github.com/gogf/gf/database/gdb.Model).OnDuplicate"),
         GoMethodDescriptor.of("(*github.com/gogf/gf/database/gdb.Model).OnDuplicateEx"),
         GoMethodDescriptor.of("(*github.com/gogf/gf/database/gdb.Model).Insert"),
