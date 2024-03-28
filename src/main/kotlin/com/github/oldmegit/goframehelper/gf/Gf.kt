@@ -36,9 +36,14 @@ object Gf {
     private fun getRelativePath(project: Project, virtualFile: VirtualFile): String {
         val basePathCls = Paths.get(project.basePath.toString())
         val filePathCls = Paths.get(virtualFile.path)
-        var absolute = basePathCls.relativize(filePathCls).toString()
-        if (File.separator == "\\") {
-            absolute = absolute.replace("\\", "/")
+        var absolute: String
+        try {
+            absolute = basePathCls.relativize(filePathCls).toString()
+            if (File.separator == "\\") {
+                absolute = absolute.replace("\\", "/")
+            }
+        } catch (_: Exception) {
+            absolute = ""
         }
         return absolute
     }
