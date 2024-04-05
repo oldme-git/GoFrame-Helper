@@ -1,5 +1,5 @@
 <templateSet group="GoFrame">
-  <template name="gfapi" value="type $apiName$Req struct {&#10;&#9;g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;&#9;$input$&#10;}&#10;&#10;type $apiName$Res struct {&#10;}" description="gen gf api struct" toReformat="false" toShortenFQNames="true">
+  <template name="gf-api" value="type $apiName$Req struct {&#10;&#9;g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;&#9;$input$&#10;}&#10;&#10;type $apiName$Res struct {&#10;}" description="gen gf api struct" toReformat="false" toShortenFQNames="true">
     <variable name="apiName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="path" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="method" expression="" defaultValue="" alwaysStopAt="true" />
@@ -8,7 +8,7 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gfapicombo" value="type (&#10;    $apiName$Req struct {&#10;        g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;        $input$&#10;    }&#10;    &#10;    $apiName$Res struct {&#10;    }&#10;)" description="gen gf api struct(gf &gt;= 2.5.7)" toReformat="false" toShortenFQNames="true">
+  <template name="gf-api-combo" value="type (&#10;    $apiName$Req struct {&#10;        g.Meta `path:&quot;$path$&quot; method:&quot;$method$&quot;`&#10;        $input$&#10;    }&#10;    &#10;    $apiName$Res struct {&#10;    }&#10;)" description="gen gf api struct(gf &gt;= 2.5.7)" toReformat="false" toShortenFQNames="true">
     <variable name="apiName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="path" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="method" expression="" defaultValue="" alwaysStopAt="true" />
@@ -17,14 +17,7 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gfservice" value="type s$serviceName$ struct {&#10;}&#10;&#10;func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${$content$}&#10;}" description="gen gf service" toReformat="false" toShortenFQNames="true">
-    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="GO_FILE" value="true" />
-    </context>
-  </template>
-  <template name="gfctrlrfunc" value="func (c *$cName$) $name$(ctx context.Context, req *$pName$.$name$Req) (res *$pName$.$name$Res, err error) {&#10;&#9;return&#10;}&#10;" description="gen gf controller" toReformat="false" toShortenFQNames="true">
+  <template name="gf-ctrl-func" value="func (c *$cName$) $name$(ctx context.Context, req *$pName$.$name$Req) (res *$pName$.$name$Res, err error) {&#10;&#9;return&#10;}&#10;" description="gen gf controller" toReformat="false" toShortenFQNames="true">
     <variable name="cName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="pName" expression="" defaultValue="" alwaysStopAt="true" />
@@ -32,9 +25,24 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gfservicefunc" value="func (s *s$serviceName$) $funcName$(ctx context.Context) (err error) {&#10;}" description="gen gf service func" toReformat="false" toShortenFQNames="true">
+  <template name="gf-srv" value="type s$serviceName$ struct {&#10;}&#10;&#10;func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${$content$}&#10;}" description="gen gf service" toReformat="false" toShortenFQNames="true">
+    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gf-srv-func" value="func (s *s$serviceName$) $funcName$(ctx context.Context) (err error) {&#10;}" description="gen gf service func" toReformat="false" toShortenFQNames="true">
     <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="funcName" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GO_FILE" value="true" />
+    </context>
+  </template>
+  <template name="gf-srv-crud" value="func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;type s$serviceName$ struct {&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${}&#10;}&#10;&#10;func (s *s$serviceName$) Create(ctx context.Context, $modelName$ *entity.$model$) (id int, err error) {&#10;&#9;return 0, nil&#10;}&#10;&#10;func (s *s$serviceName$) GetOne(ctx context.Context, id int) ($modelName$ *entity.$model$, err error) {&#10;&#9;return nil, err&#10;}&#10;&#10;func (s *s$serviceName$) GetList(ctx context.Context) (libs []*entity.$model$, err error) {&#10;&#9;return nil, err&#10;}&#10;&#10;func (s *s$serviceName$) Update(ctx context.Context, $modelName$ *entity.$model$) (err error) {&#10;&#9;return nil&#10;}&#10;&#10;func (s *s$serviceName$) Delete(ctx context.Context, id int) (err error) {&#10;&#9;return nil&#10;}&#10;" description="gen gf service crud" toReformat="false" toShortenFQNames="true">
+    <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="modelName" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="GO_FILE" value="true" />
     </context>
