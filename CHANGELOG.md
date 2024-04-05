@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+## [1.0.6] - 2024-04-05
+
+### Updated
+
+- Support 241.*
+- Support gdb.Onconflict
+
+### Fixed
+
+- FileWatch error on dir outside the project
+
 ## [1.0.5] - 2024-03-03
 
 ### Optimize
@@ -87,12 +98,13 @@
 - Service file watch
 - live template
 
-[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/oldme-git/goframe-helper/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.5
 [1.0.4]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/oldme-git/goframe-helper/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-beta...v1.0.0
-[1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta
 [1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha
+[1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta

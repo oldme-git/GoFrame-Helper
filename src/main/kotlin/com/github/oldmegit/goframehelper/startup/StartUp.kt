@@ -8,7 +8,6 @@ import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.StartupActivity
 
-
 class StartUp : StartupActivity {
     override fun runActivity(project: Project) {
         val taskTitle = Bundle.getMessage("name")
