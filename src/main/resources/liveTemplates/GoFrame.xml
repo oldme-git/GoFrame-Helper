@@ -39,10 +39,8 @@
       <option name="GO_FILE" value="true" />
     </context>
   </template>
-  <template name="gf-srv-crud" value="func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;type s$serviceName$ struct {&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${}&#10;}&#10;&#10;func (s *s$serviceName$) Create(ctx context.Context, $modelName$ *entity.$model$) (id int, err error) {&#10;&#9;return 0, nil&#10;}&#10;&#10;func (s *s$serviceName$) GetOne(ctx context.Context, id int) ($modelName$ *entity.$model$, err error) {&#10;&#9;return nil, err&#10;}&#10;&#10;func (s *s$serviceName$) GetList(ctx context.Context) (libs []*entity.$model$, err error) {&#10;&#9;return nil, err&#10;}&#10;&#10;func (s *s$serviceName$) Update(ctx context.Context, $modelName$ *entity.$model$) (err error) {&#10;&#9;return nil&#10;}&#10;&#10;func (s *s$serviceName$) Delete(ctx context.Context, id int) (err error) {&#10;&#9;return nil&#10;}&#10;" description="gen gf service crud" toReformat="false" toShortenFQNames="true">
+  <template name="gf-srv-crud" value="func init() {&#10;&#9;service.Register$serviceName$(New())&#10;}&#10;&#10;type s$serviceName$ struct {&#10;}&#10;&#10;func New() *s$serviceName$ {&#10;&#9;return &amp;s$serviceName${}&#10;}&#10;&#10;func (s *s$serviceName$) Create(ctx context.Context) (id int, err error) {&#10;&#9;return 0, nil&#10;}&#10;&#10;func (s *s$serviceName$) GetOne(ctx context.Context, id int) (err error) {&#10;&#9;return nil&#10;}&#10;&#10;func (s *s$serviceName$) GetList(ctx context.Context) (err error) {&#10;&#9;return nil&#10;}&#10;&#10;func (s *s$serviceName$) Update(ctx context.Context) (err error) {&#10;&#9;return nil&#10;}&#10;&#10;func (s *s$serviceName$) Delete(ctx context.Context, id int) (err error) {&#10;&#9;return nil&#10;}&#10;" description="gen gf service crud" toReformat="false" toShortenFQNames="true">
     <variable name="serviceName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="modelName" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="model" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="GO_FILE" value="true" />
     </context>
