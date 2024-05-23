@@ -32,7 +32,7 @@ class CompletionApiTag: CompletionBase() {
     }
 
     override fun isValidFolder(): Boolean {
-        return Gf.isApiFile(position.project, parameters.originalFile.virtualFile)
+        return true
     }
 
     private fun getStructType(): PsiElement? {
