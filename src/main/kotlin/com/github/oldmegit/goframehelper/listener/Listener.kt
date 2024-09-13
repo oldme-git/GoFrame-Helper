@@ -46,19 +46,20 @@ class Listener(private val project: Project): BulkFileListener {
                 return
             }
 
+            val workDir = project.basePath
+
             // exec command based on different systems
             val os = System.getProperty("os.name").lowercase(Locale.getDefault())
-            val process = if (os.contains("windows")) {
-                Runtime.getRuntime().exec(commandRaw, null, File(project.basePath.toString()))
+            val command = if (os.contains("windows")) {
+                arrayOf("cmd", "/c", "cd $workDir && $commandRaw")
             } else if (os.contains("linux") || os.contains("mac")) {
-                val workDir = project.basePath
-                val command = arrayOf("sh", "-c", "cd $workDir && $commandRaw")
-                ProcessBuilder(*command).start()
+                arrayOf("sh", "-c", "cd $workDir && $commandRaw")
             } else {
                 Notification.message(project, Bundle.getMessage("fileWatch.NotSupport"))
                 return
             }
 
+            val process = ProcessBuilder(*command).start()
             val code = process.waitFor()
             if (code != 0) {
                 throw Exception(code.toString())
