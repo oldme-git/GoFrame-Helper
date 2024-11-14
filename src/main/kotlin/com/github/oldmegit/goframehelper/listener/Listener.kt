@@ -6,6 +6,7 @@ import com.github.oldmegit.goframehelper.gf.GfGoMod
 import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.github.oldmegit.goframehelper.ui.Notification
 import com.goide.GoFileType
+import com.intellij.codeInsight.navigation.LOG
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
@@ -65,11 +66,11 @@ class Listener(private val project: Project): BulkFileListener {
                 throw Exception(code.toString())
             }
         } catch (_: Exception) {
-            val message = Bundle.getMessage("fileWatch.ExecErr")
-            val settings = AppSettingsState.getInstance(project)
-            settings.gfEnableApiWatch = false
-            settings.gfEnableLogicWatch = false
-            Notification.message(project, message)
+//            val message = Bundle.getMessage("fileWatch.ExecErr")
+//            val settings = AppSettingsState.getInstance(project)
+//            settings.gfEnableApiWatch = false
+//            settings.gfEnableLogicWatch = false
+//            Notification.message(project, message)
         }
     }
 }
