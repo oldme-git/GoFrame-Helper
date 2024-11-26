@@ -43,7 +43,11 @@ class CompletionApiTag: CompletionBase() {
         return null
     }
 
+    // Check struct name is end with "Req" or "Res"
+    // GoFrame have removed the requirement for struct name to end with "Req" or "Res"
+    // https://github.com/gogf/gf/commit/3d4904eb3dc558aebca89146f846d9852f3e0694
     private fun isValidStruct(): Boolean {
+        return true
         val structType = getStructType()
         if (structType == null) {
             return false
