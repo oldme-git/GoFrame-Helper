@@ -136,5 +136,5 @@
 [1.0.2]: https://github.com/oldme-git/goframe-helper/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-beta...v1.0.0
-[1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta
 [1.0.0-alpha]: https://github.com/oldme-git/goframe-helper/commits/v1.0.0-alpha
+[1.0.0-beta]: https://github.com/oldme-git/goframe-helper/compare/v1.0.0-alpha...v1.0.0-beta
