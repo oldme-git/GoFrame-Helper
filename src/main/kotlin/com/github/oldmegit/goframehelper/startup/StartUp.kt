@@ -6,10 +6,10 @@ import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.StartupActivity
+import com.intellij.openapi.startup.ProjectActivity
 
-class StartUp : StartupActivity {
-    override fun runActivity(project: Project) {
+class StartUp : ProjectActivity {
+    override suspend fun execute(project: Project) {
         val taskTitle = Bundle.getMessage("name")
         ProgressManager.getInstance().run(object : Task.Backgroundable(project, taskTitle) {
             override fun run(indicator: ProgressIndicator) {
@@ -17,6 +17,7 @@ class StartUp : StartupActivity {
                     return
                 }
                 indicator.text = Bundle.getMessage("init")
+                println(indicator.text)
                 GfGoMod.reset(project)
                 indicator.fraction = 1.0
             }
