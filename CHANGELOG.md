@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+## [1.0.8] - 2024-11-26
+
+### Updated
+
+- Don't auto close Watch when throw Exception
+- Removes the requirement for struct name to end with "Req" or "Res"
+
+### Fixed
+
+- Uses ProcessBuilder intend of exec command on windows
+- Builds error when the blank exists in rootProject.name
+- Gets ORM field name [issue#24](https://github.com/oldme-git/GoFrame-Helper/issues/24)
+
 ## [1.0.7] - 2024-08-08
 
 ### Updated
@@ -112,7 +125,8 @@
 - Service file watch
 - live template
 
-[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.7...HEAD
+[Unreleased]: https://github.com/oldme-git/goframe-helper/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/oldme-git/goframe-helper/compare/v1.0.7...v1.0.8
 [1.0.7]: https://github.com/oldme-git/goframe-helper/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/oldme-git/goframe-helper/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/oldme-git/goframe-helper/compare/v1.0.3...v1.0.5
