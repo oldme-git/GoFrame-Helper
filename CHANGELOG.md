@@ -10,6 +10,7 @@
 
 - Don't auto close Watch when throw Exception
 - Removes the requirement for struct name to end with "Req" or "Res"
+- Remove json support
 
 ### Fixed
 

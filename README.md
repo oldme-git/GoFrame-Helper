@@ -13,7 +13,7 @@ GoFrame Helper is a Goland/IntelliJ plugin for [GoFrame](https://github.com/gogf
 # Features
 - Api, Controller and Service live templates
 - OpenApi tag code completion
-- cfg module code completion(support yaml and json)
+- cfg module code completion, support yaml
 - orm module fields name code completion
 - Automatic listening for the Api and Logic to generate the Controller and Service
 - Support in Chinese and English

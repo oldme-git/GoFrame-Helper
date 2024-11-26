@@ -13,7 +13,6 @@ object CfgUtil : CallUtil() {
     private val cfgTypes = mapOf(
         "yaml" to Yaml,
         "yml" to Yaml,
-        "json" to Json,
     )
 
     override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {

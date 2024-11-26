@@ -2,7 +2,6 @@ package com.github.oldmegit.goframehelper.data.callUtil.i18n
 
 import com.github.oldmegit.goframehelper.data.callUtil.CallUtil
 import com.github.oldmegit.goframehelper.data.callUtil.i18n.types.Yaml
-import com.github.oldmegit.goframehelper.data.callUtil.i18n.types.Json
 import com.github.oldmegit.goframehelper.ui.AppSettingsState
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -15,7 +14,6 @@ object I18nUtil : CallUtil() {
     private val i18nTypes = mapOf(
         "yaml" to Yaml,
         "yml" to Yaml,
-        "json" to Json,
     )
 
     override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
