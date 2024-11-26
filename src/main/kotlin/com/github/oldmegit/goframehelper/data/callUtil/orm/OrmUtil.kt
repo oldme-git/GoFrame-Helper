@@ -2,13 +2,15 @@ package com.github.oldmegit.goframehelper.data.callUtil.orm
 
 import com.github.oldmegit.goframehelper.data.callUtil.CallUtil
 import com.goide.psi.*
+import com.goide.psi.impl.GoElementImpl
+import com.goide.psi.impl.GoKeyImpl
 import com.goide.psi.impl.GoPsiUtil
+import com.goide.psi.impl.GoValueImpl
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
 import com.intellij.psi.ResolveState
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ObjectUtils
-
 
 object OrmUtil : CallUtil() {
     override fun getData(psiElement: PsiElement): Map<String, Set<PsiElement>> {
@@ -105,22 +107,62 @@ object OrmUtil : CallUtil() {
 
     // get table data by XXXColumns of type GoTypeSpec
     private fun getTableData(columnType: GoType): Map<String, Set<PsiElement>> {
-        val typeSpec = columnType.resolve(ResolveState.initial()) as GoTypeSpec
-        val fields = PsiTreeUtil.findChildrenOfType(typeSpec, GoFieldDeclaration::class.java)
-        val data = mutableMapOf<String, Set<PsiElement>>()
+        val goTypeDeclaration = PsiTreeUtil.findFirstParent(columnType) { e: PsiElement? ->
+            e is GoTypeDeclaration
+        } as GoTypeDeclaration
+        val goVarDefinition = findGoVarDefinition(goTypeDeclaration)
+        val varFields = PsiTreeUtil.findChildrenOfType(goVarDefinition, GoElementImpl::class.java)
+        val varData = mutableMapOf<String, String>()
+        for (field in varFields) {
+            val fieldKey = field.firstChild
+            if (fieldKey !is GoKeyImpl) {
+                continue
+            }
+            if (field != null) {
+                val k = PsiTreeUtil.findChildrenOfType(field, GoKeyImpl::class.java).first()
+                val v = PsiTreeUtil.findChildrenOfType(field, GoValueImpl::class.java).first()
+                val vText = v.text.removeQuotes()
+                varData[k.text] = vText
+            }
+        }
 
-        for (field in fields) {
+        val typeSpec = columnType.resolve(ResolveState.initial()) as GoTypeSpec
+        val typeFields = PsiTreeUtil.findChildrenOfType(typeSpec, GoFieldDeclaration::class.java)
+        val typeData = mutableMapOf<String, Set<PsiElement>>()
+
+        for (field in typeFields) {
             val fieldDefinition = field.firstChild
             if (fieldDefinition !is GoFieldDefinition) {
                 continue
             }
             if (field != null) {
-                data[fieldDefinition.text.camelToSnakeCase()] = setOf(field)
+                typeData[fieldDefinition.text] = setOf(field)
             } else {
-                data[fieldDefinition.text.camelToSnakeCase()] = hashSetOf()
+                typeData[fieldDefinition.text] = hashSetOf()
             }
         }
+
+        val data = mutableMapOf<String, Set<PsiElement>>()
+        for ((k, v) in varData) {
+            data[v] = typeData[k]!!
+        }
+
         return data
+    }
+
+    // find GoVarDefinition by PsiElement
+    // for example:
+    // var linkColumns = LinkColumns{
+    //	Id:          "id",
+    //	Name:        "name",
+    //}
+    private fun findGoVarDefinition(psiElement: PsiElement?): GoVarDeclaration? {
+        val current = psiElement?.nextSibling
+        return if (current is GoVarDeclaration) {
+            current
+        } else {
+            findGoVarDefinition(current)
+        }
     }
 
     // handle type GoAssignmentStatement
@@ -184,9 +226,8 @@ object OrmUtil : CallUtil() {
         return comment.drop(2)
     }
 
-    // camel to snake case
-    private fun String.camelToSnakeCase(): String {
-        val regex = "(?<=[a-zA-Z])[A-Z]".toRegex()
-        return regex.replace(this) { "_${it.value}" }.lowercase()
+    // remove first and last double quotes
+    private fun String?.removeQuotes(): String {
+        return this?.removePrefix("\"")?.removeSuffix("\"") ?: ""
     }
 }
